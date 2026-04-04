@@ -23,7 +23,7 @@
 .intro-bg {
     position: absolute;
     top: -10%; left: -10%; width: 120%; height: 120%;
-    background: url('../intro-bg.png') center/cover no-repeat;
+    background: url('../intro-bg-animated.gif') center/cover no-repeat;
     /* Smooth dramatic zoom */
     animation: zoomAction 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     z-index: -2;
