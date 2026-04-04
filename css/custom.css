@@ -26,44 +26,68 @@
     height: 60px;
 }
 
-/* Hero Logo Highlight */
+/* Hero Logo Highlight - Rotating Red Beams */
 .hero-logo-container {
-    background-color: rgba(255, 255, 255, 0.95);
     padding: 1.5rem;
-    border-radius: 20px;
-    display: inline-block;
+    border-radius: 24px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 2rem;
-    box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3), inset 0 0 0 2px var(--clr-primary);
-    animation: floatHighlight 4s ease-in-out infinite;
     position: relative;
+    z-index: 1;
+    overflow: hidden;
+    /* Gắn hiệu ứng sáng đỏ thay vì nền xanh cũ */
+    box-shadow: 0 0 40px rgba(229, 57, 53, 0.7);
+    animation: pulseGlow 3s ease-in-out infinite alternate;
+}
+
+.hero-logo-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* Tạo tia sáng đỏ bằng conic-gradient */
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--clr-primary) 30deg,
+        transparent 60deg,
+        transparent 180deg,
+        var(--clr-primary) 210deg,
+        transparent 240deg
+    );
+    z-index: -2;
+    animation: spinBeams 4s linear infinite;
 }
 
 .hero-logo-container::after {
     content: '';
     position: absolute;
-    top: -5px; right: -5px; bottom: -5px; left: -5px;
-    background: linear-gradient(45deg, var(--clr-primary), transparent, var(--clr-primary));
+    inset: 5px; /* Độ dày của tia sáng hiển thị */
+    background: var(--clr-white);
+    border-radius: 20px; /* Độ bo góc bên trong nhỏ hơn bên ngoài */
     z-index: -1;
-    border-radius: 25px;
-    animation: borderGlow 3s linear infinite;
-    opacity: 0.7;
 }
 
 .hero-logo {
     max-width: 250px;
     height: auto;
     object-fit: contain;
+    position: relative;
+    z-index: 2;
 }
 
-@keyframes floatHighlight {
-    0% { transform: translateY(0); box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3); }
-    50% { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(229, 57, 53, 0.6); }
-    100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3); }
+@keyframes spinBeams {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@keyframes borderGlow {
-    0% { filter: hue-rotate(0deg); }
-    100% { filter: hue-rotate(360deg); }
+@keyframes pulseGlow {
+    0% { transform: scale(1); box-shadow: 0 0 30px rgba(229, 57, 53, 0.5); }
+    100% { transform: scale(1.02); box-shadow: 0 0 60px rgba(229, 57, 53, 0.9); }
 }
 
 @media (max-width: 768px) {
