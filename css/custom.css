@@ -1,191 +1,6 @@
 /* Thêm vào cuối file style.css */
 
-/* Intro Screen Styles */
-#intro-screen {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    z-index: 9999;
-    background-color: #1a0000;
-    display: flex; align-items: center; justify-content: center;
-    overflow: hidden;
-    animation: fadeOutIntro 0.8s ease-in-out forwards;
-    animation-delay: 5s; /* Fade ra hoàn toàn sau 5.8s */
-    pointer-events: none;
-}
-
-/* Base Wrapper */
-.intro-shake-wrapper {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-
-/* Background image of karate kumite - Mượt mà không viền đen */
-.intro-bg {
-    position: absolute;
-    top: -10%; left: -10%; width: 120%; height: 120%;
-    background: url('../intro-bg-animated.gif') center/cover no-repeat;
-    /* Smooth dramatic zoom */
-    animation: zoomAction 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-    z-index: -2;
-    filter: sepia(0.2) saturate(1.5) contrast(1.2) brightness(0.8);
-}
-
-/* Đổi lửa thành viền mượt mà */
-.intro-fire {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 20%, rgba(229, 57, 53, 0.4) 60%, rgba(183, 28, 28, 0.9) 100%);
-    z-index: -1;
-    pointer-events: none;
-    animation: smoothFirePulse 2s ease-in-out infinite alternate;
-}
-
-/* Anime Action Lines - Tốc độ phân thân */
-.intro-fire::after {
-    content: '';
-    position: absolute;
-    top: -50%; left: -50%; width: 200%; height: 200%;
-    background: repeating-conic-gradient(
-        from 0deg,
-        transparent 0deg,
-        transparent 5deg,
-        rgba(0, 0, 0, 0.4) 5.1deg,
-        rgba(0, 0, 0, 0.6) 5.3deg,
-        transparent 5.6deg
-    );
-    z-index: 0;
-    animation: spinActionLines 0.4s linear infinite;
-    mix-blend-mode: overlay;
-    opacity: 0.6;
-}
-
-/* Các luồng tàn lửa bay lên mượt mà */
-.intro-fire::before {
-    content: '';
-    position: absolute;
-    bottom: -20%; left: 0; width: 100%; height: 120%;
-    background-image: 
-        radial-gradient(circle, #fff 10%, transparent 20%),
-        radial-gradient(circle, #ffeb3b 10%, transparent 20%),
-        radial-gradient(circle, #ff9800 10%, transparent 20%);
-    background-size: 4px 4px, 6px 6px, 8px 8px;
-    background-position: 0 0, 80px 100px, 150px 200px;
-    animation: smoothSparks 3s linear infinite;
-    opacity: 0.8;
-}
-
-.intro-logo-container {
-    position: relative;
-    opacity: 0;
-    animation: showIntroLogo 0.8s forwards 2.5s; /* Hiện logo sau 2.5s */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 24px;
-    padding: 1rem;
-    background-color: rgba(255, 255, 255, 0.9);
-}
-
-/* Red sun rays for the intro logo */
-.intro-logo-container::before {
-    content: '';
-    position: absolute;
-    top: -30px; left: -30px; right: -30px; bottom: -30px;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg, rgba(229, 57, 53, 0.9) 15deg, transparent 30deg,
-        rgba(229, 57, 53, 0.9) 45deg, transparent 60deg,
-        rgba(229, 57, 53, 0.9) 75deg, transparent 90deg,
-        rgba(229, 57, 53, 0.9) 105deg, transparent 120deg,
-        rgba(229, 57, 53, 0.9) 135deg, transparent 150deg,
-        rgba(229, 57, 53, 0.9) 165deg, transparent 180deg,
-        rgba(229, 57, 53, 0.9) 195deg, transparent 210deg,
-        rgba(229, 57, 53, 0.9) 225deg, transparent 240deg,
-        rgba(229, 57, 53, 0.9) 255deg, transparent 270deg,
-        rgba(229, 57, 53, 0.9) 285deg, transparent 300deg,
-        rgba(229, 57, 53, 0.9) 315deg, transparent 330deg,
-        rgba(229, 57, 53, 0.9) 345deg, transparent 360deg
-    );
-    border-radius: 50%;
-    z-index: -2;
-    animation: spinBeams 8s linear infinite;
-    filter: blur(4px);
-    -webkit-mask-image: radial-gradient(circle, white 30%, transparent 70%);
-    mask-image: radial-gradient(circle, white 30%, transparent 70%);
-}
-
-.intro-logo-container::after {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    background: var(--clr-white);
-    border-radius: 12px;
-    z-index: -1;
-    box-shadow: 0 0 40px rgba(229, 57, 53, 1), 0 0 100px rgba(229, 57, 53, 0.5); 
-}
-
-.intro-logo {
-    width: 250px;
-    height: auto;
-    object-fit: contain;
-    position: relative;
-    z-index: 2;
-}
-
-/* Animations */
-@keyframes fadeOutIntro {
-    0% { opacity: 1; pointer-events: auto; }
-    99% { opacity: 0; pointer-events: auto; }
-    100% { opacity: 0; display: none; visibility: hidden; pointer-events: none; }
-}
-
-@keyframes zoomAction {
-    0% { transform: scale(1); filter: sepia(0.2) saturate(1.5) contrast(1.2) brightness(0.8); }
-    100% { transform: scale(1.15); filter: sepia(0.4) saturate(2) contrast(1.4) brightness(0.4); } 
-}
-
-@keyframes smoothFirePulse {
-    0% { opacity: 0.8; transform: scale(1); }
-    100% { opacity: 1; transform: scale(1.02); }
-}
-
-@keyframes spinActionLines {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(45deg); } 
-}
-
-@keyframes smoothSparks {
-    0% { transform: translateY(0) scale(1); opacity: 0; }
-    20% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { transform: translateY(-1000px) scale(0.5); opacity: 0; }
-}
-
-@keyframes showIntroLogo {
-    0% { opacity: 0; transform: scale(0.5); }
-    70% { opacity: 1; transform: scale(1.1); }
-    100% { opacity: 1; transform: scale(1); }
-}
-
-/* Flash overlay */
-#intro-screen::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: white;
-    z-index: 10;
-    opacity: 0;
-    pointer-events: none;
-    animation: flash 1.5s ease-out 2.5s; 
-}
-
-@keyframes flash {
-    0% { opacity: 0; }
-    30% { opacity: 1; }
-    100% { opacity: 0; }
-}
-
-/* Logo Design - Sun Rays Effect */
+/* Logo Design - Realistic Sun Rays Effect */
 .nav-logo-box {
     position: relative;
     display: flex;
@@ -199,33 +14,7 @@
     transform: scale(1.05);
 }
 
-.nav-logo-box::before {
-    content: '';
-    position: absolute;
-    top: -25px; left: -25px; right: -25px; bottom: -25px;
-    background: conic-gradient(
-        from 0deg,
-        transparent 0deg, rgba(229, 57, 53, 0.9) 15deg, transparent 30deg,
-        rgba(229, 57, 53, 0.9) 45deg, transparent 60deg,
-        rgba(229, 57, 53, 0.9) 75deg, transparent 90deg,
-        rgba(229, 57, 53, 0.9) 105deg, transparent 120deg,
-        rgba(229, 57, 53, 0.9) 135deg, transparent 150deg,
-        rgba(229, 57, 53, 0.9) 165deg, transparent 180deg,
-        rgba(229, 57, 53, 0.9) 195deg, transparent 210deg,
-        rgba(229, 57, 53, 0.9) 225deg, transparent 240deg,
-        rgba(229, 57, 53, 0.9) 255deg, transparent 270deg,
-        rgba(229, 57, 53, 0.9) 285deg, transparent 300deg,
-        rgba(229, 57, 53, 0.9) 315deg, transparent 330deg,
-        rgba(229, 57, 53, 0.9) 345deg, transparent 360deg
-    );
-    border-radius: 50%;
-    z-index: -2;
-    animation: spinBeams 10s linear infinite;
-    filter: blur(2px);
-    -webkit-mask-image: radial-gradient(circle, white 30%, transparent 70%);
-    mask-image: radial-gradient(circle, white 30%, transparent 70%);
-}
-
+/* Lõi sáng rực rỡ bên dưới logo */
 .nav-logo-box::after {
     content: '';
     position: absolute;
@@ -233,8 +22,8 @@
     background: var(--clr-white);
     border-radius: 8px;
     z-index: -1;
-    box-shadow: 0 0 20px rgba(229, 57, 53, 0.9);
-    animation: sunPulse 3s ease-in-out infinite alternate;
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.9), 0 0 40px rgba(229, 57, 53, 0.6);
+    animation: sunCorePulse 3s ease-in-out infinite alternate;
 }
 
 .logo-img {
@@ -246,9 +35,98 @@
     padding: 0.2rem 0.5rem;
 }
 
+/* Tia sáng xoay: lớp tia dài mỏng và lớp tia ngắn dày */
+.sun-rays-long, .sun-rays-short {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    z-index: -2;
+    mix-blend-mode: screen; 
+}
+
+/* Lớp tia dài mỏng */
+.sun-rays-long {
+    width: 130px; 
+    height: 130px;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg, transparent 8deg, rgba(229, 57, 53, 0.9) 10deg, transparent 12deg,
+        transparent 28deg, rgba(229, 57, 53, 0.9) 30deg, transparent 32deg,
+        transparent 48deg, rgba(229, 57, 53, 0.9) 50deg, transparent 52deg,
+        transparent 68deg, rgba(229, 57, 53, 0.9) 70deg, transparent 72deg,
+        transparent 88deg, rgba(229, 57, 53, 0.9) 90deg, transparent 92deg,
+        transparent 108deg, rgba(229, 57, 53, 0.9) 110deg, transparent 112deg,
+        transparent 128deg, rgba(229, 57, 53, 0.9) 130deg, transparent 132deg,
+        transparent 148deg, rgba(229, 57, 53, 0.9) 150deg, transparent 152deg,
+        transparent 168deg, rgba(229, 57, 53, 0.9) 170deg, transparent 172deg,
+        transparent 188deg, rgba(229, 57, 53, 0.9) 190deg, transparent 192deg,
+        transparent 208deg, rgba(229, 57, 53, 0.9) 210deg, transparent 212deg,
+        transparent 228deg, rgba(229, 57, 53, 0.9) 230deg, transparent 232deg,
+        transparent 248deg, rgba(229, 57, 53, 0.9) 250deg, transparent 252deg,
+        transparent 268deg, rgba(229, 57, 53, 0.9) 270deg, transparent 272deg,
+        transparent 288deg, rgba(229, 57, 53, 0.9) 290deg, transparent 292deg,
+        transparent 308deg, rgba(229, 57, 53, 0.9) 310deg, transparent 312deg,
+        transparent 328deg, rgba(229, 57, 53, 0.9) 330deg, transparent 332deg,
+        transparent 348deg, rgba(229, 57, 53, 0.9) 350deg, transparent 352deg,
+        transparent 360deg
+    );
+    filter: blur(2px);
+    mask-image: radial-gradient(circle, white 20%, transparent 60%);
+    -webkit-mask-image: radial-gradient(circle, white 20%, transparent 60%);
+    animation: sunRaysLongComplex 10s linear infinite;
+}
+
+/* Lớp tia ngắn dày có màu cam đỏ trộn mượt hơn */
+.sun-rays-short {
+    width: 110px;
+    height: 110px;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg, rgba(255, 87, 34, 0.8) 15deg, transparent 30deg,
+        rgba(255, 87, 34, 0.8) 45deg, transparent 60deg,
+        rgba(255, 87, 34, 0.8) 75deg, transparent 90deg,
+        rgba(255, 87, 34, 0.8) 105deg, transparent 120deg,
+        rgba(255, 87, 34, 0.8) 135deg, transparent 150deg,
+        rgba(255, 87, 34, 0.8) 165deg, transparent 180deg,
+        rgba(255, 87, 34, 0.8) 195deg, transparent 210deg,
+        rgba(255, 87, 34, 0.8) 225deg, transparent 240deg,
+        rgba(255, 87, 34, 0.8) 255deg, transparent 270deg,
+        rgba(255, 87, 34, 0.8) 285deg, transparent 300deg,
+        rgba(255, 87, 34, 0.8) 315deg, transparent 330deg,
+        rgba(255, 87, 34, 0.8) 345deg, transparent 360deg
+    );
+    filter: blur(4px);
+    mask-image: radial-gradient(circle, white 25%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle, white 25%, transparent 70%);
+    /* Xoay ngược chiều và có nhịp co dãn khác */
+    animation: sunRaysShortComplex 7s linear infinite;
+}
+
+@keyframes sunRaysLongComplex {
+    0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.9); opacity: 0.8; }
+    25% { transform: translate(-50%, -50%) rotate(90deg) scale(1.3); opacity: 1; }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(0.95); opacity: 0.85; }
+    75% { transform: translate(-50%, -50%) rotate(270deg) scale(1.2); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) rotate(360deg) scale(0.9); opacity: 0.8; }
+}
+
+@keyframes sunRaysShortComplex {
+    0% { transform: translate(-50%, -50%) rotate(360deg) scale(1.0); opacity: 0.9; }
+    33% { transform: translate(-50%, -50%) rotate(240deg) scale(1.2); opacity: 0.7; }
+    66% { transform: translate(-50%, -50%) rotate(120deg) scale(0.95); opacity: 1; }
+    100% { transform: translate(-50%, -50%) rotate(0deg) scale(1.0); opacity: 0.9; }
+}
+
+@keyframes sunCorePulse {
+    0% { box-shadow: 0 0 15px rgba(229, 57, 53, 0.8), 0 0 30px rgba(229, 57, 53, 0.4); transform: scale(1); }
+    100% { box-shadow: 0 0 25px rgba(229, 57, 53, 1), 0 0 50px rgba(255, 87, 34, 0.6); transform: scale(1.02); }
+}
+
 /* Tắt hiệu ứng logo mặt trời cho phần footer */
-.footer-logo .nav-logo-box::before,
-.footer-logo .nav-logo-box::after {
+.footer-logo .nav-logo-box::after,
+.footer-logo .sun-rays-long,
+.footer-logo .sun-rays-short {
     display: none;
 }
 
@@ -258,19 +136,11 @@
     border-radius: 8px;
 }
 
-@keyframes spinBeams {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes sunPulse {
-    0% { box-shadow: 0 0 15px rgba(229, 57, 53, 0.7); }
-    100% { box-shadow: 0 0 25px rgba(229, 57, 53, 1); }
-}
-
 @media (max-width: 768px) {
     .logo-img { height: 40px; }
 }
+
+
 
 /* Classes Section Styles */
 .classes {
