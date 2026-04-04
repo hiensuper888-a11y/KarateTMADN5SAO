@@ -1,0 +1,72 @@
+/* Thêm vào cuối file style.css */
+
+/* Logo Design */
+.nav-logo-box {
+    background-color: var(--clr-white);
+    padding: 0.2rem 0.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.nav-logo-box:hover {
+    transform: scale(1.05);
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.footer-logo .logo-img {
+    height: 60px;
+}
+
+/* Hero Logo Highlight */
+.hero-logo-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 1.5rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3), inset 0 0 0 2px var(--clr-primary);
+    animation: floatHighlight 4s ease-in-out infinite;
+    position: relative;
+}
+
+.hero-logo-container::after {
+    content: '';
+    position: absolute;
+    top: -5px; right: -5px; bottom: -5px; left: -5px;
+    background: linear-gradient(45deg, var(--clr-primary), transparent, var(--clr-primary));
+    z-index: -1;
+    border-radius: 25px;
+    animation: borderGlow 3s linear infinite;
+    opacity: 0.7;
+}
+
+.hero-logo {
+    max-width: 250px;
+    height: auto;
+    object-fit: contain;
+}
+
+@keyframes floatHighlight {
+    0% { transform: translateY(0); box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3); }
+    50% { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(229, 57, 53, 0.6); }
+    100% { transform: translateY(0); box-shadow: 0 10px 30px rgba(229, 57, 53, 0.3); }
+}
+
+@keyframes borderGlow {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@media (max-width: 768px) {
+    .logo-img { height: 40px; }
+    .hero-logo { max-width: 180px; }
+}
