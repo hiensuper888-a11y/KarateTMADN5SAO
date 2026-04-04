@@ -70,3 +70,90 @@
     .logo-img { height: 40px; }
     .hero-logo { max-width: 180px; }
 }
+
+/* Classes Section Styles */
+.classes {
+    background-color: var(--clr-gray-light);
+}
+
+.classes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.class-card {
+    background-color: var(--clr-white);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: var(--transition);
+    border-top: 4px solid var(--clr-primary);
+}
+
+.class-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+.class-title {
+    color: var(--clr-primary-dark);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px dashed rgba(229, 57, 53, 0.2);
+    padding-bottom: 0.5rem;
+}
+
+.class-location {
+    font-weight: 500;
+    color: var(--clr-black);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.class-location i {
+    color: var(--clr-primary);
+    margin-top: 3px;
+}
+
+.class-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.class-details li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.8rem;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+.class-details li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.class-details i {
+    color: var(--clr-primary);
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.class-group {
+    background-color: rgba(229, 57, 53, 0.05);
+    padding: 0.5rem!important;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    color: var(--clr-primary);
+    border-bottom: none!important;
+}
+
+.class-group strong {
+    font-size: 1rem;
+}
