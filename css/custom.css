@@ -1,5 +1,190 @@
 /* Thêm vào cuối file style.css */
 
+/* Intro Screen Styles */
+#intro-screen {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: 9999;
+    background-color: #1a0000;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    animation: fadeOutIntro 0.8s ease-in-out forwards;
+    animation-delay: 5s; /* Fade ra hoàn toàn sau 5.8s */
+    pointer-events: none;
+}
+
+/* Base Wrapper */
+.intro-shake-wrapper {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+/* Background image of karate kumite - Mượt mà không viền đen */
+.intro-bg {
+    position: absolute;
+    top: -10%; left: -10%; width: 120%; height: 120%;
+    background: url('../intro-bg.png') center/cover no-repeat;
+    /* Smooth dramatic zoom */
+    animation: zoomAction 5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    z-index: -2;
+    filter: sepia(0.2) saturate(1.5) contrast(1.2) brightness(0.8);
+}
+
+/* Đổi lửa thành viền mượt mà */
+.intro-fire {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(229, 57, 53, 0.4) 60%, rgba(183, 28, 28, 0.9) 100%);
+    z-index: -1;
+    pointer-events: none;
+    animation: smoothFirePulse 2s ease-in-out infinite alternate;
+}
+
+/* Anime Action Lines - Tốc độ phân thân */
+.intro-fire::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: repeating-conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 5deg,
+        rgba(0, 0, 0, 0.4) 5.1deg,
+        rgba(0, 0, 0, 0.6) 5.3deg,
+        transparent 5.6deg
+    );
+    z-index: 0;
+    animation: spinActionLines 0.4s linear infinite;
+    mix-blend-mode: overlay;
+    opacity: 0.6;
+}
+
+/* Các luồng tàn lửa bay lên mượt mà */
+.intro-fire::before {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: 0; width: 100%; height: 120%;
+    background-image: 
+        radial-gradient(circle, #fff 10%, transparent 20%),
+        radial-gradient(circle, #ffeb3b 10%, transparent 20%),
+        radial-gradient(circle, #ff9800 10%, transparent 20%);
+    background-size: 4px 4px, 6px 6px, 8px 8px;
+    background-position: 0 0, 80px 100px, 150px 200px;
+    animation: smoothSparks 3s linear infinite;
+    opacity: 0.8;
+}
+
+.intro-logo-container {
+    position: relative;
+    opacity: 0;
+    animation: showIntroLogo 0.8s forwards 2.5s; /* Hiện logo sau 2.5s */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Red sun rays for the intro logo */
+.intro-logo-container::before {
+    content: '';
+    position: absolute;
+    top: -30px; left: -30px; right: -30px; bottom: -30px;
+    background: conic-gradient(
+        from 0deg,
+        transparent 0deg, rgba(229, 57, 53, 0.9) 15deg, transparent 30deg,
+        rgba(229, 57, 53, 0.9) 45deg, transparent 60deg,
+        rgba(229, 57, 53, 0.9) 75deg, transparent 90deg,
+        rgba(229, 57, 53, 0.9) 105deg, transparent 120deg,
+        rgba(229, 57, 53, 0.9) 135deg, transparent 150deg,
+        rgba(229, 57, 53, 0.9) 165deg, transparent 180deg,
+        rgba(229, 57, 53, 0.9) 195deg, transparent 210deg,
+        rgba(229, 57, 53, 0.9) 225deg, transparent 240deg,
+        rgba(229, 57, 53, 0.9) 255deg, transparent 270deg,
+        rgba(229, 57, 53, 0.9) 285deg, transparent 300deg,
+        rgba(229, 57, 53, 0.9) 315deg, transparent 330deg,
+        rgba(229, 57, 53, 0.9) 345deg, transparent 360deg
+    );
+    border-radius: 50%;
+    z-index: -2;
+    animation: spinBeams 8s linear infinite;
+    filter: blur(4px);
+    -webkit-mask-image: radial-gradient(circle, white 30%, transparent 70%);
+    mask-image: radial-gradient(circle, white 30%, transparent 70%);
+}
+
+.intro-logo-container::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    background: var(--clr-white);
+    border-radius: 12px;
+    z-index: -1;
+    box-shadow: 0 0 40px rgba(229, 57, 53, 1), 0 0 100px rgba(229, 57, 53, 0.5); 
+}
+
+.intro-logo {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+}
+
+/* Animations */
+@keyframes fadeOutIntro {
+    0% { opacity: 1; pointer-events: auto; }
+    99% { opacity: 0; pointer-events: auto; }
+    100% { opacity: 0; display: none; visibility: hidden; pointer-events: none; }
+}
+
+@keyframes zoomAction {
+    0% { transform: scale(1); filter: sepia(0.2) saturate(1.5) contrast(1.2) brightness(0.8); }
+    100% { transform: scale(1.15); filter: sepia(0.4) saturate(2) contrast(1.4) brightness(0.4); } 
+}
+
+@keyframes smoothFirePulse {
+    0% { opacity: 0.8; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.02); }
+}
+
+@keyframes spinActionLines {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(45deg); } 
+}
+
+@keyframes smoothSparks {
+    0% { transform: translateY(0) scale(1); opacity: 0; }
+    20% { opacity: 1; }
+    80% { opacity: 1; }
+    100% { transform: translateY(-1000px) scale(0.5); opacity: 0; }
+}
+
+@keyframes showIntroLogo {
+    0% { opacity: 0; transform: scale(0.5); }
+    70% { opacity: 1; transform: scale(1.1); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+/* Flash overlay */
+#intro-screen::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: white;
+    z-index: 10;
+    opacity: 0;
+    pointer-events: none;
+    animation: flash 1.5s ease-out 2.5s; 
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    30% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
 /* Logo Design - Sun Rays Effect */
 .nav-logo-box {
     position: relative;
