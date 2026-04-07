@@ -251,36 +251,16 @@
         setLoading('btn-login-submit', true);
 
         try {
-            console.log('[Login] Attempting direct login for:', email);
+            console.log('[Login] Attempting login for:', email);
 
-            // Use direct REST API fetch to avoid Supabase JS PKCE blocking
-            const resp = await fetch(
-                `${window.SUPABASE_URL}/auth/v1/token?grant_type=password`,
-                {
-                    method: 'POST',
-                    headers: {
-                        'apikey': window.SUPABASE_ANON_KEY,
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ email, password: pass })
-                }
-            );
-            const tokenData = await resp.json();
-            console.log('[Login] Status:', resp.status, resp.ok);
-
-            if (!resp.ok) {
-                const errMsg = tokenData?.error_description || tokenData?.msg || tokenData?.message || 'Đăng nhập thất bại.';
-                throw new Error(errMsg);
-            }
-
-            // Set session in Supabase client so it's persisted & triggers onAuthStateChange
-            const { error: sessErr } = await sb.auth.setSession({
-                access_token: tokenData.access_token,
-                refresh_token: tokenData.refresh_token
+            const { data, error } = await sb.auth.signInWithPassword({
+                email: email,
+                password: pass
             });
-            if (sessErr) throw sessErr;
 
-            console.log('[Login] Success! User:', tokenData.user?.email);
+            if (error) throw error;
+
+            console.log('[Login] Success! User:', data.user?.email);
             closeAllModals();
         } catch (err) {
             console.error('[Login] Error:', err);
