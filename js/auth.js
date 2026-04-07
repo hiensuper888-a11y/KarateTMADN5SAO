@@ -242,27 +242,40 @@
     // ============ LOGIN ============
     document.getElementById('login-form')?.addEventListener('submit', async e => {
         e.preventDefault(); clearMessage('login-message');
-        const sb = getSB(); if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối máy chủ. Vui lòng tải lại trang.'); return; }
+        const sb = getSB(); if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối máy chủ. Tải lại trang và thử lại.'); return; }
 
         const email = document.getElementById('login-email')?.value.trim();
         const pass  = document.getElementById('login-password')?.value;
         if (!email || !pass) { showMessage('login-message', 'error', 'Vui lòng nhập email và mật khẩu.'); return; }
 
         setLoading('btn-login-submit', true);
-        const timer = setTimeout(() => { setLoading('btn-login-submit', false); showMessage('login-message', 'error', 'Hết thời gian chờ. Kiểm tra mạng và thử lại.'); }, 15000);
+        const timer = setTimeout(() => {
+            setLoading('btn-login-submit', false);
+            showMessage('login-message', 'error', 'Kết nối chậm hoặc mạng có vấn đề. Vui lòng tải lại trang và thử lại.');
+        }, 10000);
+
         try {
-            const { data, error } = await sb.auth.signInWithPassword({ email, password: pass });
+            console.log('[Login] Attempting login for:', email);
+            const result = await sb.auth.signInWithPassword({ email, password: pass });
+            console.log('[Login] Result:', result);
+
+            const { data, error } = result;
             if (error) throw error;
+            if (!data?.user) throw new Error('Không nhận được thông tin người dùng.');
+
+            console.log('[Login] Success! User:', data.user.email);
             clearTimeout(timer);
             closeAllModals();
         } catch (err) {
-            console.error('[Login]', err);
+            console.error('[Login] Error:', err);
             clearTimeout(timer);
             let msg = 'Đăng nhập thất bại.';
-            if (err.message === 'Invalid login credentials') msg = 'Email hoặc mật khẩu không đúng.';
-            else if (err.message?.includes('Email not confirmed')) msg = 'Email chưa xác nhận. Kiểm tra hộp thư của bạn.';
-            else if (err.message?.includes('fetch') || err.message?.includes('network')) msg = 'Lỗi mạng. Vui lòng thử lại.';
-            else if (err.message) msg = err.message;
+            const m = err?.message || err?.error_description || String(err) || '';
+            if (m.includes('Invalid login credentials') || m.includes('invalid_credentials')) msg = 'Email hoặc mật khẩu không đúng.';
+            else if (m.includes('Email not confirmed') || m.includes('email_not_confirmed')) msg = 'Email chưa xác nhận. Kiểm tra hộp thư.';
+            else if (m.includes('Too many requests') || m.includes('rate')) msg = 'Thử lại quá nhiều lần. Vui lòng đợi vài phút.';
+            else if (m.includes('fetch') || m.includes('network') || m.includes('Failed to fetch')) msg = 'Không kết nối được Supabase. Kiểm tra mạng.';
+            else if (m) msg = m;
             showMessage('login-message', 'error', msg);
         } finally { setLoading('btn-login-submit', false); }
     });
