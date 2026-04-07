@@ -253,6 +253,14 @@
     align-items: center;
     gap: 0.5rem;
 }
+.auth-message.warning {
+    background: rgba(255, 193, 7, 0.12);
+    border: 1px solid rgba(255, 193, 7, 0.35);
+    color: #ffe082;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
 
 /* ----- Switch link ----- */
 .auth-switch {

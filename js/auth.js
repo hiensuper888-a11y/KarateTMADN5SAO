@@ -249,10 +249,12 @@
         if (!email || !pass) { showMessage('login-message', 'error', 'Vui lòng nhập email và mật khẩu.'); return; }
 
         setLoading('btn-login-submit', true);
+        let timedOut = false;
         const timer = setTimeout(() => {
+            timedOut = true;
             setLoading('btn-login-submit', false);
-            showMessage('login-message', 'error', 'Kết nối chậm hoặc mạng có vấn đề. Vui lòng tải lại trang và thử lại.');
-        }, 10000);
+            showMessage('login-message', 'warning', 'Đang kết nối chậm, vui lòng đợi...');
+        }, 20000);
 
         try {
             console.log('[Login] Attempting login for:', email);
@@ -271,11 +273,12 @@
             clearTimeout(timer);
             let msg = 'Đăng nhập thất bại.';
             const m = err?.message || err?.error_description || String(err) || '';
-            if (m.includes('Invalid login credentials') || m.includes('invalid_credentials')) msg = 'Email hoặc mật khẩu không đúng.';
+            if (m.includes('Invalid login credentials') || m.includes('invalid_credentials')) msg = 'Email hoặc mật khẩu không đúng. Kiểm tra lại.';
             else if (m.includes('Email not confirmed') || m.includes('email_not_confirmed')) msg = 'Email chưa xác nhận. Kiểm tra hộp thư.';
             else if (m.includes('Too many requests') || m.includes('rate')) msg = 'Thử lại quá nhiều lần. Vui lòng đợi vài phút.';
-            else if (m.includes('fetch') || m.includes('network') || m.includes('Failed to fetch')) msg = 'Không kết nối được Supabase. Kiểm tra mạng.';
+            else if (m.includes('fetch') || m.includes('network') || m.includes('Failed to fetch')) msg = 'Không kết nối được máy chủ. Kiểm tra mạng.';
             else if (m) msg = m;
+            // Always show actual error even if timer already fired
             showMessage('login-message', 'error', msg);
         } finally { setLoading('btn-login-submit', false); }
     });
