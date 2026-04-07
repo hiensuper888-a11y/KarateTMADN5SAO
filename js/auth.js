@@ -242,43 +242,55 @@
     // ============ LOGIN ============
     document.getElementById('login-form')?.addEventListener('submit', async e => {
         e.preventDefault(); clearMessage('login-message');
-        const sb = getSB(); if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối máy chủ. Tải lại trang và thử lại.'); return; }
+        const sb = getSB(); if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối. Tải lại trang và thử lại.'); return; }
 
         const email = document.getElementById('login-email')?.value.trim();
         const pass  = document.getElementById('login-password')?.value;
         if (!email || !pass) { showMessage('login-message', 'error', 'Vui lòng nhập email và mật khẩu.'); return; }
 
         setLoading('btn-login-submit', true);
-        let timedOut = false;
-        const timer = setTimeout(() => {
-            timedOut = true;
-            setLoading('btn-login-submit', false);
-            showMessage('login-message', 'warning', 'Đang kết nối chậm, vui lòng đợi...');
-        }, 20000);
 
         try {
-            console.log('[Login] Attempting login for:', email);
-            const result = await sb.auth.signInWithPassword({ email, password: pass });
-            console.log('[Login] Result:', result);
+            console.log('[Login] Attempting direct login for:', email);
 
-            const { data, error } = result;
-            if (error) throw error;
-            if (!data?.user) throw new Error('Không nhận được thông tin người dùng.');
+            // Use direct REST API fetch to avoid Supabase JS PKCE blocking
+            const resp = await fetch(
+                `${window.SUPABASE_URL}/auth/v1/token?grant_type=password`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'apikey': window.SUPABASE_ANON_KEY,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password: pass })
+                }
+            );
+            const tokenData = await resp.json();
+            console.log('[Login] Status:', resp.status, resp.ok);
 
-            console.log('[Login] Success! User:', data.user.email);
-            clearTimeout(timer);
+            if (!resp.ok) {
+                const errMsg = tokenData?.error_description || tokenData?.msg || tokenData?.message || 'Đăng nhập thất bại.';
+                throw new Error(errMsg);
+            }
+
+            // Set session in Supabase client so it's persisted & triggers onAuthStateChange
+            const { error: sessErr } = await sb.auth.setSession({
+                access_token: tokenData.access_token,
+                refresh_token: tokenData.refresh_token
+            });
+            if (sessErr) throw sessErr;
+
+            console.log('[Login] Success! User:', tokenData.user?.email);
             closeAllModals();
         } catch (err) {
             console.error('[Login] Error:', err);
-            clearTimeout(timer);
             let msg = 'Đăng nhập thất bại.';
-            const m = err?.message || err?.error_description || String(err) || '';
-            if (m.includes('Invalid login credentials') || m.includes('invalid_credentials')) msg = 'Email hoặc mật khẩu không đúng. Kiểm tra lại.';
+            const m = err?.message || String(err) || '';
+            if (m.includes('Invalid login credentials') || m.includes('invalid') || m.includes('credentials')) msg = 'Email hoặc mật khẩu không đúng.';
             else if (m.includes('Email not confirmed') || m.includes('email_not_confirmed')) msg = 'Email chưa xác nhận. Kiểm tra hộp thư.';
-            else if (m.includes('Too many requests') || m.includes('rate')) msg = 'Thử lại quá nhiều lần. Vui lòng đợi vài phút.';
-            else if (m.includes('fetch') || m.includes('network') || m.includes('Failed to fetch')) msg = 'Không kết nối được máy chủ. Kiểm tra mạng.';
+            else if (m.includes('Too many') || m.includes('rate_limit')) msg = 'Thử quá nhiều lần. Vui lòng đợi vài phút.';
+            else if (m.includes('fetch') || m.includes('network') || m.includes('Failed')) msg = 'Lỗi mạng. Kiểm tra kết nối internet.';
             else if (m) msg = m;
-            // Always show actual error even if timer already fired
             showMessage('login-message', 'error', msg);
         } finally { setLoading('btn-login-submit', false); }
     });
