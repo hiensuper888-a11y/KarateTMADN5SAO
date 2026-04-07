@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Điều Lệ & Chính Sách | Karate TMA DN5SAO</title>
+    <meta name="description" content="Điều lệ võ sinh, chính sách bảo mật và điều khoản dịch vụ của Câu Lạc Bộ Karate TMA DN5SAO.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --clr-primary: #E53935;
+            --clr-primary-dark: #B71C1C;
+            --clr-dark: #0a0a0a;
+            --clr-surface: #141414;
+            --clr-surface2: #1e1e1e;
+            --clr-border: rgba(255,255,255,0.08);
+            --clr-text: #e8e8e8;
+            --clr-muted: #9e9e9e;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--clr-dark);
+            color: var(--clr-text);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+        }
+
+        /* ---- Top Nav ---- */
+        .policy-nav {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10,10,10,0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--clr-border);
+            padding: 1rem 2rem;
+            display: flex; align-items: center; gap: 1rem;
+        }
+        .policy-nav a { color: var(--clr-primary); text-decoration: none; font-weight: 700; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; }
+        .policy-nav span { color: var(--clr-muted); }
+
+        /* ---- Banner ---- */
+        .policy-banner {
+            background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #0a0a0a 100%);
+            border-bottom: 2px solid var(--clr-primary);
+            padding: 3.5rem 2rem;
+            text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .policy-banner::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at center, rgba(229,57,53,0.15) 0%, transparent 70%);
+        }
+        .policy-banner h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; color: #fff;
+            position: relative; z-index: 1;
+        }
+        .policy-banner h1 span { color: var(--clr-primary); }
+        .policy-banner p { color: var(--clr-muted); margin-top: 0.75rem; font-size: 1rem; position: relative; z-index: 1; }
+
+        /* ---- Layout ---- */
+        .policy-container {
+            max-width: 1100px; margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: grid; grid-template-columns: 260px 1fr; gap: 2rem;
+        }
+
+        /* ---- Sidebar Nav ---- */
+        .policy-sidebar {
+            position: sticky; top: 72px;
+            height: fit-content;
+            background: var(--clr-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: 16px; padding: 1.5rem;
+        }
+        .policy-sidebar h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--clr-primary); margin-bottom: 1rem;
+        }
+        .sidebar-link {
+            display: flex; align-items: center; gap: 0.6rem;
+            padding: 0.65rem 0.75rem; border-radius: 8px;
+            color: var(--clr-muted); text-decoration: none;
+            font-size: 0.875rem; font-weight: 500;
+            transition: all 0.2s; margin-bottom: 0.25rem;
+            border: 1px solid transparent;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(229,57,53,0.1);
+            border-color: rgba(229,57,53,0.2);
+            color: #fff;
+        }
+        .sidebar-link i { color: var(--clr-primary); font-size: 1rem; flex-shrink: 0; }
+
+        /* ---- Content ---- */
+        .policy-content { min-width: 0; }
+
+        .policy-section {
+            background: var(--clr-surface);
+            border: 1px solid var(--clr-border);
+            border-radius: 16px; padding: 2rem; margin-bottom: 2rem;
+            scroll-margin-top: 80px;
+        }
+        .policy-section:first-child { border-top: 3px solid var(--clr-primary); }
+
+        .section-header {
+            display: flex; align-items: center; gap: 0.875rem;
+            margin-bottom: 1.5rem; padding-bottom: 1rem;
+            border-bottom: 1px solid var(--clr-border);
+        }
+        .section-icon {
+            width: 44px; height: 44px; border-radius: 12px;
+            background: rgba(229,57,53,0.15);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--clr-primary); font-size: 1.3rem; flex-shrink: 0;
+        }
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 1px; color: #fff;
+        }
+        .section-header p { font-size: 0.8rem; color: var(--clr-muted); margin-top: 0.2rem; }
+
+        /* Age group tabs */
+        .age-tabs {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .age-tab {
+            padding: 0.4rem 1rem; border-radius: 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem; font-weight: 700;
+            cursor: pointer; border: 1px solid var(--clr-border);
+            background: transparent; color: var(--clr-muted);
+            transition: all 0.2s;
+        }
+        .age-tab.active, .age-tab:hover {
+            background: var(--clr-primary); border-color: var(--clr-primary);
+            color: #fff;
+        }
+        .age-content { display: none; }
+        .age-content.active { display: block; }
+
+        /* Rules list */
+        .rules-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 1px; color: var(--clr-primary);
+            margin: 1.25rem 0 0.75rem;
+        }
+        .rules-section h3:first-child { margin-top: 0; }
+
+        .rules-list {
+            list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .rules-list li {
+            display: flex; gap: 0.75rem; align-items: flex-start;
+            padding: 0.6rem 0.875rem;
+            background: rgba(255,255,255,0.03);
+            border-left: 3px solid var(--clr-primary);
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem; color: var(--clr-text);
+        }
+        .rules-list li i { color: var(--clr-primary); flex-shrink: 0; margin-top: 2px; }
+
+        .rules-list.warning li { border-left-color: #FF9800; }
+        .rules-list.warning li i { color: #FF9800; }
+        .rules-list.danger li { border-left-color: #f44336; }
+        .rules-list.danger li i { color: #f44336; }
+
+        .badge-age {
+            display: inline-block; padding: 0.15rem 0.6rem;
+            border-radius: 20px; font-size: 0.72rem; font-weight: 700;
+            background: rgba(229,57,53,0.2); color: var(--clr-primary);
+            font-family: 'Montserrat', sans-serif; letter-spacing: 0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Policy text */
+        .policy-text p { margin-bottom: 1rem; font-size: 0.9rem; color: var(--clr-text); }
+        .policy-text strong { color: #fff; }
+        .policy-text a { color: var(--clr-primary); text-decoration: none; }
+
+        /* Footer */
+        .policy-footer {
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--clr-border);
+            color: var(--clr-muted); font-size: 0.85rem;
+        }
+        .policy-footer a { color: var(--clr-primary); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .policy-container { grid-template-columns: 1fr; }
+            .policy-sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Nav -->
+    <div class="policy-nav">
+        <a href="index.html"><i class="ri-arrow-left-line"></i> Trang chủ</a>
+        <span>/</span>
+        <span>Điều Lệ & Chính Sách</span>
+    </div>
+
+    <!-- Banner -->
+    <div class="policy-banner">
+        <h1>Điều Lệ &amp; <span>Chính Sách</span></h1>
+        <p>Câu Lạc Bộ Karate TMA DN5SAO — Vì sự phát triển lành mạnh của võ sinh</p>
+    </div>
+
+    <div class="policy-container">
+
+        <!-- Sidebar -->
+        <aside class="policy-sidebar">
+            <h3>Nội Dung</h3>
+            <a href="#vo-sinh-rules" class="sidebar-link"><i class="ri-team-line"></i> Điều Lệ Võ Sinh</a>
+            <a href="#hlv-rules" class="sidebar-link"><i class="ri-shield-star-line"></i> Điều Lệ HLV</a>
+            <a href="#training-rules" class="sidebar-link"><i class="ri-calendar-check-line"></i> Nội Quy Tập Luyện</a>
+            <a href="#competition" class="sidebar-link"><i class="ri-trophy-line"></i> Thi Đấu & Thành Tích</a>
+            <a href="#privacy" class="sidebar-link"><i class="ri-lock-line"></i> Chính Sách Bảo Mật</a>
+            <a href="#terms" class="sidebar-link"><i class="ri-file-text-line"></i> Điều Khoản Dịch Vụ</a>
+            <a href="#contact" class="sidebar-link"><i class="ri-customer-service-2-line"></i> Liên Hệ & Khiếu Nại</a>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="policy-content">
+
+            <!-- ===== VÕ SINH ===== -->
+            <section class="policy-section" id="vo-sinh-rules">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-team-line"></i></div>
+                    <div>
+                        <h2>Điều Lệ Võ Sinh</h2>
+                        <p>Theo độ tuổi & cấp độ tập luyện</p>
+                    </div>
+                </div>
+
+                <div class="age-tabs">
+                    <button class="age-tab active" onclick="showAge('mam-non')">🌱 U6–U8 (Mầm Non)</button>
+                    <button class="age-tab" onclick="showAge('thieu-nhi')">⚡ U10–U12 (Thiếu Nhi)</button>
+                    <button class="age-tab" onclick="showAge('thieu-nien')">🥊 U14–U17 (Thiếu Niên)</button>
+                    <button class="age-tab" onclick="showAge('thanh-nien')">🏆 U18+ (Thanh Niên & Người Lớn)</button>
+                </div>
+
+                <!-- U6-U8 Mầm Non -->
+                <div class="age-content active" id="age-mam-non">
+                    <span class="badge-age">ĐỘ TUỔI 5–8 TUỔI</span>
+                    <div class="rules-section">
+                        <h3>📋 Quyền & Nghĩa Vụ</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Phụ huynh/người giám hộ phải ký đồng ý tham gia và cam kết theo dõi buổi tập.</li>
+                            <li><i class="ri-check-line"></i>Phụ huynh cần có mặt trong suốt buổi tập hoặc ủy quyền cho người có trách nhiệm.</li>
+                            <li><i class="ri-check-line"></i>Võ sinh được quyền tham gia tất cả hoạt động phù hợp với độ tuổi.</li>
+                            <li><i class="ri-check-line"></i>Được hưởng môi trường học tập an toàn, vui vẻ và không bạo lực.</li>
+                        </ul>
+                        <h3>🎽 Trang Phục & Dụng Cụ</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Mặc võ phục karate sạch sẽ, đúng màu theo quy định CLB.</li>
+                            <li><i class="ri-check-line"></i>Đai trắng — bắt buộc, được phát khi đăng ký.</li>
+                            <li><i class="ri-check-line"></i>Không mang đồ trang sức, đồ vật sắc nhọn vào sàn tập.</li>
+                            <li><i class="ri-check-line"></i>Cắt móng tay, móng chân gọn gàng trước mỗi buổi tập.</li>
+                        </ul>
+                        <h3>⚠️ Quy Định An Toàn</h3>
+                        <ul class="rules-list warning">
+                            <li><i class="ri-alert-line"></i>Không được đánh/đá bạn khi chưa có sự hướng dẫn của HLV.</li>
+                            <li><i class="ri-alert-line"></i>Không chạy giỡn ngoài khu vực tập khi không có sự giám sát.</li>
+                            <li><i class="ri-alert-line"></i>Báo ngay HLV nếu bị đau hoặc khó chịu trong khi tập.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- U10-U12 Thiếu Nhi -->
+                <div class="age-content" id="age-thieu-nhi">
+                    <span class="badge-age">ĐỘ TUỔI 9–12 TUỔI</span>
+                    <div class="rules-section">
+                        <h3>📋 Quyền & Nghĩa Vụ</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Tham gia đầy đủ các buổi tập theo lịch đăng ký.</li>
+                            <li><i class="ri-check-line"></i>Thực hiện nghiêm túc theo hướng dẫn của HLV trong tất cả bài tập.</li>
+                            <li><i class="ri-check-line"></i>Được quyền tham gia các giải thi đấu nội bộ CLB.</li>
+                            <li><i class="ri-check-line"></i>Phụ huynh cần thông báo trước khi nghỉ tập hơn 2 buổi liên tiếp.</li>
+                        </ul>
+                        <h3>🏋️ Nội Quy Tập Luyện</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Đến tập đúng giờ — trễ hơn 15 phút phải xin phép HLV trước khi vào sàn.</li>
+                            <li><i class="ri-check-line"></i>Chào trước khi vào và sau khi ra khỏi sàn tập.</li>
+                            <li><i class="ri-check-line"></i>Không sử dụng điện thoại trong giờ tập.</li>
+                            <li><i class="ri-check-line"></i>Giữ trật tự, vệ sinh khu vực tập luyện.</li>
+                        </ul>
+                        <h3>⚠️ Kỷ Luật</h3>
+                        <ul class="rules-list warning">
+                            <li><i class="ri-alert-line"></i>Nghỉ không phép quá 5 buổi/tháng: cảnh cáo lần 1.</li>
+                            <li><i class="ri-alert-line"></i>Có hành vi bắt nạt, gây gổ với bạn tập: tạm đình chỉ 1 tuần.</li>
+                            <li><i class="ri-alert-line"></i>Tái phạm sau cảnh cáo: buộc nghỉ học và hoàn trả học phí còn lại.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- U14-U17 Thiếu Niên -->
+                <div class="age-content" id="age-thieu-nien">
+                    <span class="badge-age">ĐỘ TUỔI 13–17 TUỔI</span>
+                    <div class="rules-section">
+                        <h3>📋 Cam Kết Tập Luyện</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Ký cam kết tập luyện và tuân thủ kỷ luật CLB khi đăng ký.</li>
+                            <li><i class="ri-check-line"></i>Duy trì tỷ lệ tham gia buổi tập tối thiểu 80%/tháng để được thi lên đai.</li>
+                            <li><i class="ri-check-line"></i>Có quyền đề xuất ý kiến xây dựng CLB thông qua HLV phụ trách.</li>
+                            <li><i class="ri-check-line"></i>Đủ điều kiện tham gia cả giải nội bộ và giải thành phố/khu vực.</li>
+                        </ul>
+                        <h3>💪 Yêu Cầu Kỹ Thuật</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Hoàn thành các bài kata theo yêu cầu của mỗi cấp đai.</li>
+                            <li><i class="ri-check-line"></i>Thực hành đúng kỹ thuật đấu đối luyện (kumite) an toàn.</li>
+                            <li><i class="ri-check-line"></i>Tham gia thi lên đai: tối đa 2 lần/năm theo lịch CLB.</li>
+                        </ul>
+                        <h3>🚫 Điều Cấm</h3>
+                        <ul class="rules-list danger">
+                            <li><i class="ri-close-circle-line"></i>Tuyệt đối không sử dụng kỹ năng karate để gây ẩu đả bên ngoài.</li>
+                            <li><i class="ri-close-circle-line"></i>Không sử dụng chất kích thích, rượu bia trước và trong khi tập.</li>
+                            <li><i class="ri-close-circle-line"></i>Không chia sẻ thông tin nội bộ CLB lên mạng xã hội khi chưa được phép.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- U18+ Thanh Niên -->
+                <div class="age-content" id="age-thanh-nien">
+                    <span class="badge-age">TỪ 18 TUỔI TRỞ LÊN</span>
+                    <div class="rules-section">
+                        <h3>📋 Quyền & Nghĩa Vụ</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Tự ký hợp đồng tập luyện và chịu trách nhiệm cá nhân.</li>
+                            <li><i class="ri-check-line"></i>Tham gia đầy đủ theo lịch đã đăng ký; thông báo trước 24h nếu vắng.</li>
+                            <li><i class="ri-check-line"></i>Được tham gia thi đấu cấp tỉnh, toàn quốc nếu đạt yêu cầu kỹ thuật.</li>
+                            <li><i class="ri-check-line"></i>Có thể hỗ trợ HLV trong các buổi tập thiếu nhi (cộng tác viên).</li>
+                        </ul>
+                        <h3>⚖️ Học Phí & Quy Định Tài Chính</h3>
+                        <ul class="rules-list">
+                            <li><i class="ri-check-line"></i>Đóng học phí đúng hạn theo thông báo (đầu tháng).</li>
+                            <li><i class="ri-check-line"></i>Phí thi đai, thi đấu được thông báo riêng — không bao gồm học phí.</li>
+                            <li><i class="ri-check-line"></i>Học phí không hoàn trả khi tự ý nghỉ giữa kỳ (trừ trường hợp bất khả kháng).</li>
+                        </ul>
+                        <h3>🚫 Điều Cấm</h3>
+                        <ul class="rules-list danger">
+                            <li><i class="ri-close-circle-line"></i>Không sử dụng kỹ năng karate để đe dọa hoặc gây thương tích ngoài sàn tập.</li>
+                            <li><i class="ri-close-circle-line"></i>Không quay phim, chụp ảnh kỹ thuật mật mà chưa được HLV đồng ý.</li>
+                            <li><i class="ri-close-circle-line"></i>Không tập luyện, hướng dẫn kỹ thuật cho người ngoài khi không được ủy quyền.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ===== HLV ===== -->
+            <section class="policy-section" id="hlv-rules">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-shield-star-line"></i></div>
+                    <div>
+                        <h2>Điều Lệ Huấn Luyện Viên</h2>
+                        <p>Tiêu chuẩn chuyên môn & đạo đức nghề nghiệp</p>
+                    </div>
+                </div>
+                <div class="rules-section">
+                    <h3>🎓 Tiêu Chuẩn Năng Lực</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Có bằng HLV karate tối thiểu cấp 1 do Liên đoàn Karate Việt Nam cấp.</li>
+                        <li><i class="ri-check-line"></i>Đai nâu (Nidan) trở lên — ưu tiên đai đen và đã thi đấu có thành tích.</li>
+                        <li><i class="ri-check-line"></i>Tham gia bồi dưỡng chuyên môn do CLB/Liên đoàn tổ chức ít nhất 1 lần/năm.</li>
+                        <li><i class="ri-check-line"></i>Có chứng chỉ sơ cứu cơ bản (khuyến khích).</li>
+                    </ul>
+                    <h3>👥 Trách Nhiệm Với Võ Sinh</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Đảm bảo an toàn tuyệt đối cho võ sinh trong suốt buổi tập.</li>
+                        <li><i class="ri-check-line"></i>Không phân biệt đối xử; tôn trọng mọi võ sinh bất kể năng lực.</li>
+                        <li><i class="ri-check-line"></i>Thông báo kịp thời cho phụ huynh (thiếu nhi) khi có sự cố bất thường.</li>
+                        <li><i class="ri-check-line"></i>Không tiếp xúc cơ thể không cần thiết với võ sinh dưới 18 tuổi.</li>
+                        <li><i class="ri-check-line"></i>Ghi nhận và báo cáo mọi chấn thương trong buổi tập.</li>
+                    </ul>
+                    <h3>🏛️ Đạo Đức Nghề Nghiệp</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Đến dạy đúng giờ; thông báo trước ít nhất 2 tiếng nếu không thể có mặt.</li>
+                        <li><i class="ri-check-line"></i>Giữ bí mật thông tin cá nhân của võ sinh và phụ huynh.</li>
+                        <li><i class="ri-check-line"></i>Không nhận học phí riêng ngoài trường hợp dạy kèm đã thông qua CLB.</li>
+                    </ul>
+                    <h3>🚫 Điều Cấm Tuyệt Đối</h3>
+                    <ul class="rules-list danger">
+                        <li><i class="ri-close-circle-line"></i>Không dùng hình thức trừng phạt thể xác đối với bất kỳ võ sinh nào.</li>
+                        <li><i class="ri-close-circle-line"></i>Không có hành vi quấy rối, lạm dụng hoặc phân biệt đối xử.</li>
+                        <li><i class="ri-close-circle-line"></i>Không dạy học song song tại cơ sở khác cùng thời gian cam kết với CLB.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===== NỘI QUY TẬP LUYỆN ===== -->
+            <section class="policy-section" id="training-rules">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-calendar-check-line"></i></div>
+                    <div>
+                        <h2>Nội Quy Tập Luyện Chung</h2>
+                        <p>Áp dụng cho tất cả thành viên CLB</p>
+                    </div>
+                </div>
+                <div class="rules-section">
+                    <h3>⏰ Thời Gian & Tham Gia</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Có mặt trước giờ tập ít nhất 5 phút để khởi động.</li>
+                        <li><i class="ri-check-line"></i>Nghỉ tập phải thông báo qua nhóm CLB trước 1 tiếng.</li>
+                        <li><i class="ri-check-line"></i>Mỗi khóa học = 3 tháng, đóng học phí đầu mỗi tháng.</li>
+                        <li><i class="ri-check-line"></i>Tạm hoãn tập (tối đa 30 ngày/năm): báo HLV, không tính học phí thời gian nghỉ.</li>
+                    </ul>
+                    <h3>🏠 Vệ Sinh Sàn Tập</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Tháo giày dép trước khi bước lên sàn tatami.</li>
+                        <li><i class="ri-check-line"></i>Không ăn uống trên sàn tập (trừ nước lọc).</li>
+                        <li><i class="ri-check-line"></i>Dọn dẹp, gấp áo giáp, đệm sau buổi tập.</li>
+                    </ul>
+                    <h3>📱 Điện Thoại & Thiết Bị</h3>
+                    <ul class="rules-list warning">
+                        <li><i class="ri-alert-line"></i>Tắt chuông, để chế độ im lặng khi vào sàn tập.</li>
+                        <li><i class="ri-alert-line"></i>HLV cho phép mới được quay video — tôn trọng quyền riêng tư của bạn tập.</li>
+                        <li><i class="ri-alert-line"></i>Không đăng video/ảnh bạn tập lên mạng khi chưa được đồng ý.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===== THI ĐẤU ===== -->
+            <section class="policy-section" id="competition">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-trophy-line"></i></div>
+                    <div>
+                        <h2>Thi Đấu & Thành Tích</h2>
+                        <p>Điều kiện, quyền lợi và cam kết</p>
+                    </div>
+                </div>
+                <div class="rules-section">
+                    <h3>📜 Điều Kiện Tham Gia Thi Đấu</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Tham gia tập luyện liên tục ít nhất 3 tháng tại CLB.</li>
+                        <li><i class="ri-check-line"></i>Đạt tỷ lệ chuyên cần ≥ 80% trong tháng trước giải.</li>
+                        <li><i class="ri-check-line"></i>Được HLV phụ trách xét duyệt đủ kỹ năng tham gia hạng mục.</li>
+                        <li><i class="ri-check-line"></i>Đóng phí tham gia giải theo thông báo (nếu có).</li>
+                    </ul>
+                    <h3>🥇 Quyền Lợi Khi Đạt Thành Tích</h3>
+                    <ul class="rules-list">
+                        <li><i class="ri-check-line"></i>Huy chương, bằng khen, giấy chứng nhận theo quy định giải.</li>
+                        <li><i class="ri-check-line"></i>Thông báo thành tích trên fanpage CLB (khi có sự đồng ý).</li>
+                        <li><i class="ri-check-line"></i>Giảm học phí tháng tiếp theo: Vàng 50% — Bạc 30% — Đồng 15% (giải cấp tỉnh trở lên).</li>
+                    </ul>
+                    <h3>⚠️ Đạo Đức Thi Đấu</h3>
+                    <ul class="rules-list warning">
+                        <li><i class="ri-alert-line"></i>Tôn trọng đối thủ và trọng tài trong mọi trường hợp.</li>
+                        <li><i class="ri-alert-line"></i>Không phân tâm hoặc làm mất tập trung của đối thủ.  </li>
+                        <li><i class="ri-alert-line"></i>Thất bại phải tâm phục; không có hành vi phản đối phi thể thao.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- ===== CHÍNH SÁCH BẢO MẬT ===== -->
+            <section class="policy-section" id="privacy">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-lock-line"></i></div>
+                    <div>
+                        <h2>Chính Sách Bảo Mật</h2>
+                        <p>Cách chúng tôi bảo vệ thông tin của bạn</p>
+                    </div>
+                </div>
+                <div class="policy-text">
+                    <p><strong>Thu thập thông tin:</strong> Chúng tôi thu thập Họ tên, Email, Số điện thoại, Địa chỉ, Số CCCD/CMND và Nghề nghiệp khi bạn đăng ký tài khoản. Thông tin này được dùng cho mục đích quản lý thành viên CLB.</p>
+                    <p><strong>Mục đích sử dụng:</strong> Thông tin được dùng để: (1) Xác minh danh tính thành viên; (2) Liên lạc về lịch tập, sự kiện; (3) Cấp phép tham gia thi đấu; (4) Thống kê nội bộ phục vụ phát triển CLB.</p>
+                    <p><strong>Bảo mật dữ liệu:</strong> Dữ liệu được lưu trữ trên hệ thống Supabase với mã hóa AES-256. Chúng tôi không bán hoặc chia sẻ thông tin cá nhân cho bên thứ ba ngoài các trường hợp: (1) Yêu cầu pháp lý; (2) Đăng ký giải thi đấu (chỉ thông tin cần thiết).</p>
+                    <p><strong>Quyền của bạn:</strong> Bạn có quyền xem, chỉnh sửa hoặc yêu cầu xóa thông tin cá nhân bất kỳ lúc nào thông qua trang hồ sơ hoặc liên hệ trực tiếp với Admin CLB.</p>
+                    <p><strong>Ảnh đại diện:</strong> Ảnh được tải lên lưu trữ trên hệ thống lưu trữ đám mây an toàn. Bạn có thể xóa hoặc thay đổi bất kỳ lúc nào.</p>
+                    <p><strong>Cookie:</strong> Website sử dụng cookie phiên (session) để duy trì đăng nhập. Không sử dụng cookie theo dõi bên thứ ba.</p>
+                    <p><em>Cập nhật lần cuối: Tháng 4/2025</em></p>
+                </div>
+            </section>
+
+            <!-- ===== ĐIỀU KHOẢN ===== -->
+            <section class="policy-section" id="terms">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-file-text-line"></i></div>
+                    <div>
+                        <h2>Điều Khoản Dịch Vụ</h2>
+                        <p>Cam kết giữa thành viên và CLB</p>
+                    </div>
+                </div>
+                <div class="policy-text">
+                    <p><strong>1. Chấp nhận điều khoản:</strong> Khi đăng ký tài khoản tại hệ thống CLB Karate TMA DN5SAO, bạn đồng ý tuân thủ toàn bộ điều khoản này.</p>
+                    <p><strong>2. Tài khoản:</strong> Mỗi thành viên chỉ được đăng ký và sử dụng một tài khoản. Bạn có trách nhiệm bảo mật mật khẩu. CLB không chịu trách nhiệm nếu tài khoản bị truy cập trái phép do lỗi bảo mật từ phía người dùng.</p>
+                    <p><strong>3. Nội dung:</strong> Bạn chịu trách nhiệm về tính chính xác của thông tin đăng ký. Thông tin sai lệch dẫn đến xử lý sai vai trò/quyền hạn là trách nhiệm của người dùng.</p>
+                    <p><strong>4. Chấm dứt:</strong> CLB có quyền vô hiệu hóa tài khoản vi phạm nội quy mà không cần thông báo trước. Thành viên có quyền yêu cầu xóa tài khoản bất kỳ lúc nào.</p>
+                    <p><strong>5. Thay đổi điều khoản:</strong> CLB có quyền cập nhật điều khoản bất kỳ lúc nào. Thông báo sẽ được gửi qua email đã đăng ký.</p>
+                    <p><strong>6. Giải quyết tranh chấp:</strong> Mọi khiếu nại được giải quyết theo quy trình nội bộ CLB trước khi đưa ra cơ quan pháp lý.</p>
+                </div>
+            </section>
+
+            <!-- ===== LIÊN HỆ ===== -->
+            <section class="policy-section" id="contact">
+                <div class="section-header">
+                    <div class="section-icon"><i class="ri-customer-service-2-line"></i></div>
+                    <div>
+                        <h2>Liên Hệ & Khiếu Nại</h2>
+                        <p>Chúng tôi luôn lắng nghe</p>
+                    </div>
+                </div>
+                <div class="rules-section">
+                    <ul class="rules-list">
+                        <li><i class="ri-facebook-circle-line"></i><div><strong>Fanpage Facebook:</strong> <a href="https://www.facebook.com/Dn5Sao.TMA.VietNam" target="_blank" style="color:var(--clr-primary);">Karate TMA DN5SAO</a></div></li>
+                        <li><i class="ri-mail-line"></i><div><strong>Email Ban Quản Lý:</strong> admin@karate-tmadn5sao.com</div></li>
+                        <li><i class="ri-time-line"></i><div><strong>Thời gian phản hồi:</strong> 24–48 giờ trong ngày làm việc (Thứ 2 – Thứ 7)</div></li>
+                        <li><i class="ri-shield-check-line"></i><div><strong>Quy trình khiếu nại:</strong> Gửi email mô tả vụ việc → Ban Quản Lý xem xét trong 3–5 ngày → Phản hồi bằng văn bản hoặc gặp trực tiếp.</div></li>
+                    </ul>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="policy-footer">
+        <p>© 2025 Câu Lạc Bộ Karate TMA DN5SAO — <a href="index.html">Quay về trang chủ</a></p>
+    </footer>
+
+    <script>
+        // Age tab switcher
+        function showAge(id) {
+            document.querySelectorAll('.age-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.age-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById('age-' + id)?.classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Sidebar active on scroll
+        const sections = document.querySelectorAll('.policy-section');
+        const links = document.querySelectorAll('.sidebar-link');
+        window.addEventListener('scroll', () => {
+            let currentId = '';
+            sections.forEach(sec => {
+                if (window.scrollY + 100 >= sec.offsetTop) currentId = sec.id;
+            });
+            links.forEach(link => {
+                link.classList.toggle('active', link.getAttribute('href') === '#' + currentId);
+            });
+        });
+    </script>
+</body>
+</html>

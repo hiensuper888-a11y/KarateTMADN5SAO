@@ -451,55 +451,121 @@
         <p class="auth-switch">Đã có tài khoản? <a href="#" id="switch-to-login">Đăng nhập</a></p>
     </div>
 
-    <!-- ===== PROFILE MODAL ===== -->
-    <div id="profile-modal" class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+    <!-- ===== PROFILE MODAL (Tabbed) ===== -->
+    <div id="profile-modal" class="auth-modal profile-modal-wide" role="dialog" aria-modal="true" aria-labelledby="profile-title">
         <button class="modal-close" id="profile-modal-close" aria-label="Đóng"><i class="ri-close-line"></i></button>
 
+        <!-- Header: Avatar + Name + Role -->
         <div class="profile-header">
-            <div class="profile-avatar" id="profile-avatar-letter">U</div>
+            <div class="profile-avatar-wrapper" id="profile-avatar-click" title="Nhấn để đổi ảnh đại diện">
+                <div class="profile-avatar-container" id="profile-avatar-container">
+                    <img id="profile-avatar-img" src="" alt="Avatar" style="display:none; width:100%; height:100%; object-fit:cover; border-radius:50%;">
+                    <span id="profile-avatar-letter" style="display:flex; align-items:center; justify-content:center; width:100%; height:100%;">U</span>
+                </div>
+                <div class="avatar-upload-overlay"><i class="ri-camera-line"></i></div>
+            </div>
+            <input type="file" id="avatar-upload-input" accept="image/*" style="display:none;">
             <div class="profile-name" id="profile-name-display">Tên người dùng</div>
             <span class="profile-role-badge badge-pending" id="profile-role-display">Chờ phê duyệt</span>
         </div>
 
-        <div class="profile-info-grid">
-            <div class="profile-info-item">
-                <i class="ri-mail-line"></i>
-                <div>
-                    <div class="info-label">Email</div>
-                    <div class="info-value" id="profile-email-display">—</div>
-                </div>
-            </div>
-            <div class="profile-info-item">
-                <i class="ri-phone-line"></i>
-                <div>
-                    <div class="info-label">Số điện thoại</div>
-                    <div class="info-value" id="profile-phone-display">—</div>
-                </div>
-            </div>
-            <div class="profile-info-item">
-                <i class="ri-map-pin-line"></i>
-                <div>
-                    <div class="info-label">Địa chỉ</div>
-                    <div class="info-value" id="profile-address-display">—</div>
-                </div>
-            </div>
-            <div class="profile-info-item">
-                <i class="ri-id-card-line"></i>
-                <div>
-                    <div class="info-label">Số CCCD / CMND</div>
-                    <div class="info-value" id="profile-cccd-display">—</div>
-                </div>
-            </div>
+        <!-- Tabs -->
+        <div class="profile-tabs">
+            <button class="profile-tab active" data-tab="view"><i class="ri-user-line"></i> Hồ Sơ</button>
+            <button class="profile-tab" data-tab="edit"><i class="ri-edit-line"></i> Chỉnh Sửa</button>
+            <button class="profile-tab" data-tab="password"><i class="ri-lock-line"></i> Đổi Mật Khẩu</button>
         </div>
 
-        <!-- Admin link (only shown for admin role) -->
-        <a href="admin.html" class="btn-admin-action-link" id="profile-admin-link" style="display:none;">
-            <i class="ri-dashboard-3-line"></i> Vào trang quản trị
-        </a>
+        <!-- TAB 1: View Profile -->
+        <div class="profile-tab-content active" id="tab-view">
+            <div class="profile-info-grid">
+                <div class="profile-info-item">
+                    <i class="ri-mail-line"></i>
+                    <div><div class="info-label">Email</div><div class="info-value" id="profile-email-display">—</div></div>
+                </div>
+                <div class="profile-info-item">
+                    <i class="ri-phone-line"></i>
+                    <div><div class="info-label">Điện thoại</div><div class="info-value" id="profile-phone-display">—</div></div>
+                </div>
+                <div class="profile-info-item">
+                    <i class="ri-suitcase-line"></i>
+                    <div><div class="info-label">Nghề nghiệp</div><div class="info-value" id="profile-occupation-display">—</div></div>
+                </div>
+                <div class="profile-info-item">
+                    <i class="ri-map-pin-line"></i>
+                    <div><div class="info-label">Địa chỉ</div><div class="info-value" id="profile-address-display">—</div></div>
+                </div>
+                <div class="profile-info-item">
+                    <i class="ri-id-card-line"></i>
+                    <div><div class="info-label">Số CCCD / CMND</div><div class="info-value" id="profile-cccd-display">—</div></div>
+                </div>
+            </div>
+            <a href="policies.html" class="profile-policy-link" target="_blank">
+                <i class="ri-shield-check-line"></i> Xem điều lệ &amp; chính sách
+            </a>
+            <a href="admin.html" class="btn-admin-action-link" id="profile-admin-link" style="display:none;">
+                <i class="ri-dashboard-3-line"></i> Vào trang quản trị
+            </a>
+            <button class="btn-logout-profile" id="btn-logout-profile">
+                <i class="ri-logout-box-r-line"></i> Đăng Xuất
+            </button>
+        </div>
 
-        <button class="btn-logout-profile" id="btn-logout-profile">
-            <i class="ri-logout-box-r-line"></i> Đăng Xuất
-        </button>
+        <!-- TAB 2: Edit Profile -->
+        <div class="profile-tab-content" id="tab-edit">
+            <div id="edit-message" class="auth-message"></div>
+            <form id="edit-profile-form" novalidate>
+                <div class="form-group">
+                    <label for="edit-fullname"><i class="ri-user-3-line"></i> Họ và tên *</label>
+                    <input type="text" id="edit-fullname" placeholder="Nguyễn Văn A" required>
+                </div>
+                <div class="auth-form-row">
+                    <div class="form-group">
+                        <label for="edit-phone"><i class="ri-phone-line"></i> Điện thoại</label>
+                        <input type="tel" id="edit-phone" placeholder="09xx xxx xxx">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-occupation"><i class="ri-suitcase-line"></i> Nghề nghiệp</label>
+                        <input type="text" id="edit-occupation" placeholder="Học sinh, sinh viên...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="edit-address"><i class="ri-map-pin-line"></i> Địa chỉ</label>
+                    <input type="text" id="edit-address" placeholder="Số nhà, đường, phường/xã, quận/huyện">
+                </div>
+                <div class="form-group">
+                    <label for="edit-cccd"><i class="ri-id-card-line"></i> Số CCCD / CMND</label>
+                    <input type="text" id="edit-cccd" placeholder="9-12 chữ số" inputmode="numeric">
+                </div>
+                <button type="submit" class="btn-auth-submit" id="btn-save-profile">
+                    <i class="ri-save-line"></i> Lưu Thay Đổi
+                </button>
+            </form>
+        </div>
+
+        <!-- TAB 3: Change Password -->
+        <div class="profile-tab-content" id="tab-password">
+            <div id="password-message" class="auth-message"></div>
+            <form id="change-password-form" novalidate>
+                <div class="form-group">
+                    <label for="new-password"><i class="ri-lock-password-line"></i> Mật khẩu mới *</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="new-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" required>
+                        <button type="button" class="toggle-password"><i class="ri-eye-line"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-new-password"><i class="ri-lock-2-line"></i> Xác nhận mật khẩu mới *</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="confirm-new-password" placeholder="Nhập lại mật khẩu mới" autocomplete="new-password" required>
+                        <button type="button" class="toggle-password"><i class="ri-eye-line"></i></button>
+                    </div>
+                </div>
+                <button type="submit" class="btn-auth-submit" id="btn-change-password">
+                    <i class="ri-key-line"></i> Đổi Mật Khẩu
+                </button>
+            </form>
+        </div>
     </div>
 
     <!-- ========== SCRIPTS ========== -->
@@ -512,31 +578,5 @@
     <!-- Main JS -->
     <script src="js/main.js"></script>
 
-    <style>
-    /* Admin link in profile modal */
-    .btn-admin-action-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.5rem;
-        padding: 0.7rem;
-        background: rgba(229, 57, 53, 0.1);
-        border: 1px solid rgba(229, 57, 53, 0.25);
-        border-radius: 10px;
-        color: #E53935;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 0.875rem;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        text-decoration: none;
-        margin-bottom: 0.75rem;
-        transition: all 0.25s ease;
-    }
-    .btn-admin-action-link:hover {
-        background: rgba(229,57,53,0.2);
-        box-shadow: 0 5px 15px rgba(229,57,53,0.2);
-    }
-    </style>
 </body>
 </html>
