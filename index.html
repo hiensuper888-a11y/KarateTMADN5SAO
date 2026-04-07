@@ -25,6 +25,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/auth.css">
     <!-- Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
@@ -70,6 +71,21 @@
                     <li class="nav-item"><a href="#values" class="nav-link">Giá Trị Cốt Lõi</a></li>
                     <li class="nav-item"><a href="#classes" class="nav-link">Các Lớp Học</a></li>
                     <li class="nav-item"><a href="#contact" class="nav-link btn-contact">Liên Hệ Ngay</a></li>
+                    <!-- Auth buttons: Guest state -->
+                    <li class="nav-item nav-auth-group" id="nav-auth-guest">
+                        <a href="#" class="nav-link btn-nav-login" id="btn-open-login">Đăng Nhập</a>
+                        <a href="#" class="nav-link btn-nav-register" id="btn-open-register">Đăng Ký</a>
+                    </li>
+                    <!-- Auth buttons: Logged in state -->
+                    <li class="nav-item nav-auth-group" id="nav-auth-user">
+                        <a href="#" class="nav-link btn-nav-profile" id="btn-open-profile">
+                            <span class="nav-avatar" id="nav-avatar-letter">U</span>
+                            <span id="user-display-name">Hồ Sơ</span>
+                        </a>
+                        <a href="#" class="nav-link btn-nav-logout" id="btn-logout" title="Đăng xuất">
+                            <i class="ri-logout-box-r-line"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -341,7 +357,186 @@
         </div>
     </footer>
 
+    <!-- ========== AUTH MODALS ========== -->
+
+    <!-- Overlay -->
+    <div id="auth-overlay" class="auth-overlay"></div>
+
+    <!-- ===== LOGIN MODAL ===== -->
+    <div id="login-modal" class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="login-title">
+        <button class="modal-close" id="login-modal-close" aria-label="Đóng"><i class="ri-close-line"></i></button>
+        <div class="auth-modal-header">
+            <img src="https://graph.facebook.com/Dn5Sao.TMA.VietNam/picture?width=200&height=200"
+                 alt="Logo DN5SAO" class="auth-modal-logo">
+            <h2 id="login-title">Đăng Nhập</h2>
+            <p>Chào mừng trở lại võ sinh!</p>
+            <div class="auth-accent-line"></div>
+        </div>
+
+        <div id="login-message" class="auth-message"></div>
+
+        <form id="login-form" novalidate>
+            <div class="form-group">
+                <label for="login-email"><i class="ri-mail-line"></i> Email *</label>
+                <input type="email" id="login-email" placeholder="email@example.com" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password"><i class="ri-lock-password-line"></i> Mật khẩu *</label>
+                <div class="input-wrapper">
+                    <input type="password" id="login-password" placeholder="••••••••" autocomplete="current-password" required>
+                    <button type="button" class="toggle-password"><i class="ri-eye-line"></i></button>
+                </div>
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btn-login-submit">Đăng Nhập</button>
+        </form>
+
+        <p class="auth-switch">Chưa có tài khoản? <a href="#" id="switch-to-register">Đăng ký ngay</a></p>
+    </div>
+
+    <!-- ===== REGISTER MODAL ===== -->
+    <div id="register-modal" class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="register-title">
+        <button class="modal-close" id="register-modal-close" aria-label="Đóng"><i class="ri-close-line"></i></button>
+        <div class="auth-modal-header">
+            <img src="https://graph.facebook.com/Dn5Sao.TMA.VietNam/picture?width=200&height=200"
+                 alt="Logo DN5SAO" class="auth-modal-logo">
+            <h2 id="register-title">Đăng Ký</h2>
+            <p>Tạo tài khoản để theo dõi tiến trình học tập</p>
+            <div class="auth-accent-line"></div>
+        </div>
+
+        <div id="register-message" class="auth-message"></div>
+
+        <form id="register-form" novalidate>
+            <div class="form-group">
+                <label for="reg-fullname"><i class="ri-user-3-line"></i> Họ và tên *</label>
+                <input type="text" id="reg-fullname" placeholder="Nguyễn Văn A" autocomplete="name" required>
+            </div>
+            <div class="auth-form-row">
+                <div class="form-group">
+                    <label for="reg-email"><i class="ri-mail-line"></i> Email *</label>
+                    <input type="email" id="reg-email" placeholder="email@example.com" autocomplete="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone"><i class="ri-phone-line"></i> Số điện thoại *</label>
+                    <input type="tel" id="reg-phone" placeholder="09xx xxx xxx" autocomplete="tel">
+                </div>
+            </div>
+            <div class="auth-form-row">
+                <div class="form-group">
+                    <label for="reg-password"><i class="ri-lock-password-line"></i> Mật khẩu *</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="reg-password" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password" required>
+                        <button type="button" class="toggle-password"><i class="ri-eye-line"></i></button>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="reg-confirm-password"><i class="ri-lock-2-line"></i> Xác nhận *</label>
+                    <div class="input-wrapper">
+                        <input type="password" id="reg-confirm-password" placeholder="Nhập lại mật khẩu" autocomplete="new-password" required>
+                        <button type="button" class="toggle-password"><i class="ri-eye-line"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="reg-address"><i class="ri-map-pin-line"></i> Địa chỉ</label>
+                <input type="text" id="reg-address" placeholder="Số nhà, đường, phường/xã, quận/huyện" autocomplete="street-address">
+            </div>
+            <div class="form-group">
+                <label for="reg-cccd"><i class="ri-id-card-line"></i> Số CCCD / CMND</label>
+                <input type="text" id="reg-cccd" placeholder="Nhập số CCCD (9-12 chữ số)" inputmode="numeric">
+            </div>
+            <button type="submit" class="btn-auth-submit" id="btn-register-submit">Tạo Tài Khoản</button>
+        </form>
+
+        <p class="auth-switch">Đã có tài khoản? <a href="#" id="switch-to-login">Đăng nhập</a></p>
+    </div>
+
+    <!-- ===== PROFILE MODAL ===== -->
+    <div id="profile-modal" class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="profile-title">
+        <button class="modal-close" id="profile-modal-close" aria-label="Đóng"><i class="ri-close-line"></i></button>
+
+        <div class="profile-header">
+            <div class="profile-avatar" id="profile-avatar-letter">U</div>
+            <div class="profile-name" id="profile-name-display">Tên người dùng</div>
+            <span class="profile-role-badge badge-pending" id="profile-role-display">Chờ phê duyệt</span>
+        </div>
+
+        <div class="profile-info-grid">
+            <div class="profile-info-item">
+                <i class="ri-mail-line"></i>
+                <div>
+                    <div class="info-label">Email</div>
+                    <div class="info-value" id="profile-email-display">—</div>
+                </div>
+            </div>
+            <div class="profile-info-item">
+                <i class="ri-phone-line"></i>
+                <div>
+                    <div class="info-label">Số điện thoại</div>
+                    <div class="info-value" id="profile-phone-display">—</div>
+                </div>
+            </div>
+            <div class="profile-info-item">
+                <i class="ri-map-pin-line"></i>
+                <div>
+                    <div class="info-label">Địa chỉ</div>
+                    <div class="info-value" id="profile-address-display">—</div>
+                </div>
+            </div>
+            <div class="profile-info-item">
+                <i class="ri-id-card-line"></i>
+                <div>
+                    <div class="info-label">Số CCCD / CMND</div>
+                    <div class="info-value" id="profile-cccd-display">—</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin link (only shown for admin role) -->
+        <a href="admin.html" class="btn-admin-action-link" id="profile-admin-link" style="display:none;">
+            <i class="ri-dashboard-3-line"></i> Vào trang quản trị
+        </a>
+
+        <button class="btn-logout-profile" id="btn-logout-profile">
+            <i class="ri-logout-box-r-line"></i> Đăng Xuất
+        </button>
+    </div>
+
+    <!-- ========== SCRIPTS ========== -->
+    <!-- Supabase CDN (load first) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Supabase client init -->
+    <script src="js/supabase-client.js"></script>
+    <!-- Auth logic -->
+    <script src="js/auth.js"></script>
     <!-- Main JS -->
     <script src="js/main.js"></script>
+
+    <style>
+    /* Admin link in profile modal */
+    .btn-admin-action-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.7rem;
+        background: rgba(229, 57, 53, 0.1);
+        border: 1px solid rgba(229, 57, 53, 0.25);
+        border-radius: 10px;
+        color: #E53935;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        margin-bottom: 0.75rem;
+        transition: all 0.25s ease;
+    }
+    .btn-admin-action-link:hover {
+        background: rgba(229,57,53,0.2);
+        box-shadow: 0 5px 15px rgba(229,57,53,0.2);
+    }
+    </style>
 </body>
 </html>
