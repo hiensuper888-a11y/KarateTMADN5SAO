@@ -377,13 +377,16 @@
     // ============ AUTH STATE ============
     const _sb = getSB();
     if (_sb) {
-        _sb.auth.onAuthStateChange(async (event, session) => {
+        _sb.auth.onAuthStateChange((event, session) => {
             if (session?.user) {
-                try {
-                    const { data: profile } = await _sb.from('profiles').select('*').eq('id', session.user.id).single();
-                    currentUser = session.user; currentProfile = profile;
-                    updateNavbar(session.user, profile);
-                } catch { updateNavbar(session.user, null); }
+                // Execute async fetch without blocking the auth callback (prevents deadlock)
+                (async () => {
+                    try {
+                        const { data: profile } = await _sb.from('profiles').select('*').eq('id', session.user.id).single();
+                        currentUser = session.user; currentProfile = profile;
+                        updateNavbar(session.user, profile);
+                    } catch { updateNavbar(session.user, null); }
+                })();
             } else {
                 currentUser = null; currentProfile = null;
                 updateNavbar(null, null);
