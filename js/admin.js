@@ -8,12 +8,17 @@
 
     const SUPABASE_URL = 'https://copkpxudxwetizqzhbsy.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvcGtweHVkeHdldGl6cXpoYnN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU1MjcyNzcsImV4cCI6MjA5MTEwMzI3N30.JFI7_Nlrwwei7v2tbADXDl2JMrsz0MOt6ArPGi6hbLw';
-    // Service role bypasses RLS - KEEP THIS PAGE PRIVATE
     const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvcGtweHVkeHdldGl6cXpoYnN5Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc3NTUyNzI3NywiZXhwIjoyMDkxMTAzMjc3fQ.nmZaxHd3Q7RhY6OQkKH-Qohljmbl4RA3vRstkmHQrow';
 
-    // Two clients: anon for auth check, service for admin ops
-    const anonClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-    const adminClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY);
+    // Reuse the shared client (window.sb) from supabase-client.js for auth
+    // This ensures the same session is shared between admin and index pages
+    const anonClient = window.sb || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { flowType: 'implicit', persistSession: true, detectSessionInUrl: false }
+    });
+    // Service role client for admin operations (bypasses RLS)
+    const adminClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
+        auth: { flowType: 'implicit', persistSession: false, autoRefreshToken: false }
+    });
 
     // ---- DOM ----
     const loginSection = document.getElementById('admin-login-section');
@@ -250,7 +255,9 @@
 
     // ---- Logout ----
     document.getElementById('admin-logout-btn') && document.getElementById('admin-logout-btn').addEventListener('click', async () => {
-        await anonClient.auth.signOut();
+        // Use window.sb if that's what we're using (ensures full session clear)
+        const clientToUse = window.sb || anonClient;
+        await clientToUse.auth.signOut();
         showLoginSection('Đã đăng xuất khỏi trang quản trị.', 'success');
     });
 

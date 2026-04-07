@@ -731,7 +731,8 @@
             <!-- Sidebar -->
             <aside class="admin-sidebar">
                 <div class="sidebar-brand">
-                    <img src="https://graph.facebook.com/Dn5Sao.TMA.VietNam/picture?width=100&height=100"
+                    <img src="img/logo.png"
+                         onerror="this.onerror=null; this.src='https://graph.facebook.com/Dn5Sao.TMA.VietNam/picture?width=100&height=100'"
                          alt="Logo" class="sidebar-logo">
                     <div class="sidebar-brand-text">
                         <h2>Karate TMA DN5SAO</h2>
@@ -744,7 +745,7 @@
                     <a href="#" class="sidebar-nav-item active">
                         <i class="ri-group-line"></i> Danh sách thành viên
                     </a>
-                    <a href="index.html" class="sidebar-nav-item" target="_blank">
+                    <a href="index.html" class="sidebar-nav-item" target="_blank" rel="noopener">
                         <i class="ri-home-line"></i> Xem trang chủ
                     </a>
                 </nav>
@@ -774,7 +775,7 @@
                         <button class="btn-admin-action outline" id="btn-refresh">
                             <i class="ri-refresh-line"></i> Làm mới
                         </button>
-                        <a href="index.html" class="btn-admin-action primary">
+                        <a href="index.html" class="btn-admin-action primary" target="_blank" rel="noopener">
                             <i class="ri-home-line"></i> Trang chủ
                         </a>
                     </div>
@@ -873,6 +874,8 @@
 
     <!-- Supabase CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Shared Supabase client (defines window.sb with flowType:implicit) -->
+    <script src="js/supabase-client.js"></script>
     <!-- Admin logic -->
     <script src="js/admin.js"></script>
 
