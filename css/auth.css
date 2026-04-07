@@ -1,0 +1,488 @@
+/* ============================================
+   Auth Modal Styles - Karate TMA DN5SAO
+   Premium Glassmorphism Design
+   ============================================ */
+
+/* ----- Overlay ----- */
+.auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 2000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+}
+.auth-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* ----- Modal Base ----- */
+.auth-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -48%) scale(0.95);
+    z-index: 2100;
+    width: 100%;
+    max-width: 480px;
+    background: linear-gradient(145deg, #1a1a1a, #111111);
+    border: 1px solid rgba(229, 57, 53, 0.25);
+    border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255,255,255,0.05);
+    padding: 2.8rem 2.5rem 2.2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #E53935 #1a1a1a;
+}
+.auth-modal::-webkit-scrollbar { width: 5px; }
+.auth-modal::-webkit-scrollbar-track { background: #1a1a1a; }
+.auth-modal::-webkit-scrollbar-thumb { background: #E53935; border-radius: 3px; }
+
+.auth-modal.active {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* ----- Close button ----- */
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    background: rgba(255,255,255,0.07);
+    border: none;
+    border-radius: 50%;
+    color: #aaa;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    line-height: 1;
+}
+.modal-close:hover {
+    background: rgba(229, 57, 53, 0.25);
+    color: #E53935;
+    transform: rotate(90deg);
+}
+
+/* ----- Modal Header ----- */
+.auth-modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.auth-modal-logo {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    border: 3px solid rgba(229, 57, 53, 0.5);
+    box-shadow: 0 0 20px rgba(229, 57, 53, 0.3);
+}
+.auth-modal-header h2 {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.35rem;
+}
+.auth-modal-header p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+.auth-accent-line {
+    width: 50px;
+    height: 3px;
+    background: linear-gradient(90deg, #E53935, #ff6b6b);
+    border-radius: 2px;
+    margin: 0.6rem auto 0;
+}
+
+/* ----- Form Groups ----- */
+.auth-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+.form-group {
+    margin-bottom: 1.15rem;
+}
+.form-group label {
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.45rem;
+    font-family: 'Montserrat', sans-serif;
+}
+.form-group label i {
+    color: #E53935;
+    margin-right: 0.3rem;
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-size: 0.95rem;
+    font-family: 'Roboto', sans-serif;
+    transition: all 0.25s ease;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.form-group input::placeholder { color: rgba(255, 255, 255, 0.25); }
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #E53935;
+    background: rgba(229, 57, 53, 0.08);
+    box-shadow: 0 0 0 3px rgba(229, 57, 53, 0.15);
+}
+.form-group select option { background: #1a1a1a; color: #fff; }
+
+/* Password toggle */
+.input-wrapper {
+    position: relative;
+}
+.input-wrapper input { padding-right: 2.8rem; }
+.toggle-password {
+    position: absolute;
+    right: 0.85rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.35);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+}
+.toggle-password:hover { color: #E53935; }
+
+/* ----- Submit Button ----- */
+.btn-auth-submit {
+    width: 100%;
+    padding: 0.9rem 1.5rem;
+    background: linear-gradient(135deg, #E53935, #C62828);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+.btn-auth-submit::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transition: left 0.5s ease;
+}
+.btn-auth-submit:hover::before { left: 100%; }
+.btn-auth-submit:hover {
+    box-shadow: 0 8px 25px rgba(229, 57, 53, 0.4);
+    transform: translateY(-1px);
+}
+.btn-auth-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+.btn-auth-submit .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+/* ----- Error / Success ----- */
+.auth-message {
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    display: none;
+}
+.auth-message.error {
+    background: rgba(229, 57, 53, 0.15);
+    border: 1px solid rgba(229, 57, 53, 0.35);
+    color: #ff8a80;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.auth-message.success {
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.35);
+    color: #a5d6a7;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* ----- Switch link ----- */
+.auth-switch {
+    text-align: center;
+    margin-top: 1.25rem;
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.875rem;
+}
+.auth-switch a {
+    color: #E53935;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.auth-switch a:hover { color: #ff6b6b; }
+
+/* Divider */
+.auth-divider {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0 1rem;
+    color: rgba(255,255,255,0.2);
+    font-size: 0.8rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+}
+
+/* ----- Profile Modal specific ----- */
+.profile-header {
+    text-align: center;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1.5rem;
+}
+.profile-avatar {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #E53935, #C62828);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+    margin: 0 auto 1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    box-shadow: 0 0 25px rgba(229, 57, 53, 0.4);
+}
+.profile-name {
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+.profile-role-badge {
+    display: inline-block;
+    padding: 0.25rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.badge-pending { background: rgba(255,193,7,0.15); color: #ffc107; border: 1px solid rgba(255,193,7,0.3); }
+.badge-vo_sinh { background: rgba(33,150,243,0.15); color: #64b5f6; border: 1px solid rgba(33,150,243,0.3); }
+.badge-huan_luyen_vien { background: rgba(156,39,176,0.15); color: #ce93d8; border: 1px solid rgba(156,39,176,0.3); }
+.badge-phu_huynh { background: rgba(76,175,80,0.15); color: #a5d6a7; border: 1px solid rgba(76,175,80,0.3); }
+.badge-admin { background: rgba(229,57,53,0.15); color: #E53935; border: 1px solid rgba(229,57,53,0.3); }
+
+.profile-info-grid {
+    display: grid;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+}
+.profile-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255,255,255,0.04);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.06);
+}
+.profile-info-item i {
+    color: #E53935;
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+}
+.profile-info-item div { flex: 1; }
+.profile-info-item .info-label {
+    color: rgba(255,255,255,0.4);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+}
+.profile-info-item .info-value {
+    color: #fff;
+    font-size: 0.95rem;
+    margin-top: 0.1rem;
+}
+.profile-info-item .info-value.empty { color: rgba(255,255,255,0.3); font-style: italic; }
+
+.btn-logout-profile {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(229, 57, 53, 0.1);
+    border: 1px solid rgba(229, 57, 53, 0.3);
+    border-radius: 10px;
+    color: #E53935;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.btn-logout-profile:hover {
+    background: rgba(229, 57, 53, 0.2);
+    box-shadow: 0 5px 15px rgba(229,57,53,0.2);
+}
+
+/* ----- Navbar auth buttons ----- */
+.nav-auth-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.btn-nav-login {
+    color: rgba(255, 255, 255, 0.85) !important;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 6px;
+    font-size: 0.85rem !important;
+    transition: all 0.25s ease !important;
+}
+.btn-nav-login::after { display: none !important; }
+.btn-nav-login:hover {
+    border-color: rgba(255,255,255,0.6) !important;
+    background: rgba(255,255,255,0.07);
+    color: #fff !important;
+}
+.btn-nav-register {
+    color: #fff !important;
+    background: linear-gradient(135deg, #E53935, #C62828);
+    padding: 0.4rem 1rem;
+    border-radius: 6px;
+    font-size: 0.85rem !important;
+    transition: all 0.25s ease !important;
+}
+.btn-nav-register::after { display: none !important; }
+.btn-nav-register:hover {
+    box-shadow: 0 5px 15px rgba(229,57,53,0.4);
+    transform: translateY(-1px);
+}
+.btn-nav-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(255,255,255,0.85) !important;
+    padding: 0.35rem 0.9rem;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-size: 0.85rem !important;
+    transition: all 0.25s ease;
+}
+.btn-nav-profile::after { display: none !important; }
+.btn-nav-profile:hover { border-color: #E53935 !important; color: #fff !important; background: rgba(229,57,53,0.1); }
+.btn-nav-profile .nav-avatar {
+    width: 26px;
+    height: 26px;
+    background: linear-gradient(135deg, #E53935, #C62828);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+}
+.btn-nav-logout {
+    color: rgba(229,57,53,0.8) !important;
+    font-size: 0.82rem !important;
+    padding: 0.35rem;
+    transition: color 0.2s ease;
+}
+.btn-nav-logout::after { display: none !important; }
+.btn-nav-logout:hover { color: #E53935 !important; }
+
+/* hide profile by default */
+#nav-auth-user { display: none !important; }
+#nav-auth-user.visible { display: flex !important; }
+#nav-auth-guest.hidden { display: none !important; }
+
+/* ----- Animations ----- */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ----- Responsive ----- */
+@media (max-width: 540px) {
+    .auth-modal {
+        max-width: 95vw;
+        padding: 2rem 1.5rem 1.8rem;
+        margin: 0 0.5rem;
+        top: 50%;
+        left: 50%;
+    }
+    .auth-form-row {
+        grid-template-columns: 1fr;
+    }
+}
