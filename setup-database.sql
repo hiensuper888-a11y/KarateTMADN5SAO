@@ -20,7 +20,10 @@ CREATE TABLE IF NOT EXISTS public.profiles (
   phone TEXT DEFAULT '',
   role TEXT DEFAULT 'pending' CHECK (role IN ('pending', 'vo_sinh', 'huan_luyen_vien', 'phu_huynh', 'admin')),
   created_at TIMESTAMPTZ DEFAULT NOW(),
-  updated_at TIMESTAMPTZ DEFAULT NOW()
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  belt_rank TEXT,
+  martial_art_school TEXT,
+  country TEXT
 );
 
 -- 3. Bật Row Level Security

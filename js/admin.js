@@ -183,6 +183,7 @@
                     <div class="table-user-info">
                         <div class="table-user-name">${u.full_name || '—'}</div>
                         <div class="table-user-email">${u.email || '—'}</div>
+                        <div style="font-size: 0.72rem; color: #a5d6a7; margin-top: 2px;">${u.belt_rank ? `🥋 ${u.belt_rank}` : ''}${u.martial_art_school ? ` - ${u.martial_art_school}` : ''}</div>
                     </div>
                 </td>
                 <td>${u.phone || '<span class="empty-cell">—</span>'}</td>

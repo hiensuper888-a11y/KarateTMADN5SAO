@@ -173,6 +173,11 @@
         const name = profile?.full_name || user.email.split('@')[0];
         const role = profile?.role || 'pending';
 
+        const hasMartialArts = role === 'vo_sinh' || role === 'huan_luyen_vien';
+        document.querySelectorAll('.martial-arts-field').forEach(el => {
+            el.style.display = hasMartialArts ? '' : 'none';
+        });
+
         // Header
         updateAvatarDisplay(profile?.avatar_url, name);
         const nameEl = document.getElementById('profile-name-display');
@@ -187,6 +192,9 @@
         setField('profile-address-display', profile?.address);
         setField('profile-cccd-display', profile?.cccd);
         setField('profile-occupation-display', profile?.occupation);
+        setField('profile-beltrank-display', profile?.belt_rank);
+        setField('profile-school-display', profile?.martial_art_school);
+        setField('profile-country-display', profile?.country);
 
         // Edit tab
         setInput('edit-fullname', profile?.full_name);
@@ -194,6 +202,9 @@
         setInput('edit-address', profile?.address);
         setInput('edit-cccd', profile?.cccd);
         setInput('edit-occupation', profile?.occupation);
+        setInput('edit-beltrank', profile?.belt_rank);
+        setInput('edit-school', profile?.martial_art_school);
+        setInput('edit-country', profile?.country);
 
         // Admin link
         const adminLink = document.getElementById('profile-admin-link');
@@ -314,14 +325,17 @@
         const address    = document.getElementById('edit-address')?.value.trim();
         const cccd       = document.getElementById('edit-cccd')?.value.trim();
         const occupation = document.getElementById('edit-occupation')?.value.trim();
+        const belt_rank = document.getElementById('edit-beltrank')?.value.trim() || null;
+        const martial_art_school = document.getElementById('edit-school')?.value.trim() || null;
+        const country = document.getElementById('edit-country')?.value.trim() || null;
 
         if (!full_name) { showMessage('edit-message', 'error', 'Vui lòng nhập họ và tên.'); return; }
 
         setLoading('btn-save-profile', true);
         try {
-            const { error } = await sb.from('profiles').update({ full_name, phone, address, cccd, occupation }).eq('id', currentUser.id);
+            const { error } = await sb.from('profiles').update({ full_name, phone, address, cccd, occupation, belt_rank, martial_art_school, country }).eq('id', currentUser.id);
             if (error) throw error;
-            currentProfile = { ...currentProfile, full_name, phone, address, cccd, occupation };
+            currentProfile = { ...currentProfile, full_name, phone, address, cccd, occupation, belt_rank, martial_art_school, country };
             populateProfileModal(currentUser, currentProfile);
             updateNavbar(currentUser, currentProfile);
             showMessage('edit-message', 'success', '✅ Cập nhật hồ sơ thành công!');

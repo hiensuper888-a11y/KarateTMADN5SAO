@@ -505,6 +505,18 @@
                     <i class="ri-suitcase-line"></i>
                     <div><div class="info-label">Nghề nghiệp</div><div class="info-value" id="profile-occupation-display">—</div></div>
                 </div>
+                <div class="profile-info-item martial-arts-field" style="display: none;">
+                    <i class="ri-medal-line"></i>
+                    <div><div class="info-label">Cấp đai (Belt Rank)</div><div class="info-value" id="profile-beltrank-display">—</div></div>
+                </div>
+                <div class="profile-info-item martial-arts-field" style="display: none;">
+                    <i class="ri-sword-line"></i>
+                    <div><div class="info-label">Hệ phái (School)</div><div class="info-value" id="profile-school-display">—</div></div>
+                </div>
+                <div class="profile-info-item martial-arts-field" style="display: none;">
+                    <i class="ri-global-line"></i>
+                    <div><div class="info-label">Quốc gia</div><div class="info-value" id="profile-country-display">—</div></div>
+                </div>
                 <div class="profile-info-item">
                     <i class="ri-map-pin-line"></i>
                     <div><div class="info-label">Địa chỉ</div><div class="info-value" id="profile-address-display">—</div></div>
@@ -541,6 +553,33 @@
                     <div class="form-group">
                         <label for="edit-occupation"><i class="ri-suitcase-line"></i> Nghề nghiệp</label>
                         <input type="text" id="edit-occupation" placeholder="Học sinh, sinh viên...">
+                    </div>
+                </div>
+                <div class="form-group martial-arts-field" style="display: none;">
+                    <label for="edit-beltrank"><i class="ri-medal-line"></i> Cấp đai Karate</label>
+                    <select id="edit-beltrank" style="width: 100%; padding: 0.8rem 1.1rem; border-radius: 10px; outline: none; background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-b, sans-serif);">
+                        <option value="" style="color: #000;">-- Chưa cập nhật --</option>
+                        <option value="Trắng (Kyu 10)" style="color: #000;">Đai Trắng (Kyu 10) - Cấp độ bắt đầu</option>
+                        <option value="Vàng (Kyu 9-8)" style="color: #000;">Đai Vàng (Kyu 9, 8) - Nhật Bản/Việt Nam</option>
+                        <option value="Cam (Kyu 7)" style="color: #000;">Đai Cam (Kyu 7) - Các hệ phái hiện đại</option>
+                        <option value="Xanh Lá (Kyu 6)" style="color: #000;">Đai Xanh Lá (Kyu 6)</option>
+                        <option value="Xanh Đậm (Kyu 5-4)" style="color: #000;">Đai Xanh Đậm (Kyu 5, 4)</option>
+                        <option value="Nâu (Kyu 3-1)" style="color: #000;">Đai Nâu (Kyu 3, 2, 1) - Giai đoạn cao cấp (Kyu)</option>
+                        <option value="Đen (Shodan 1 Dan)" style="color: #000;">Đai Đen Nhất Đẳng (1 Dan / Shodan)</option>
+                        <option value="Đen (Nidan 2 Dan)" style="color: #000;">Đai Đen Nhị Đẳng (2 Dan / Nidan)</option>
+                        <option value="Đen (Sandan 3 Dan)" style="color: #000;">Đai Đen Tam Đẳng (3 Dan / Sandan)</option>
+                        <option value="Đen (4 Dan trở lên)" style="color: #000;">Đai Đen Tứ Đẳng trở lên (4+ Dan)</option>
+                    </select>
+                    <small style="color: rgba(255,255,255,0.4); margin-top: 5px; display: block; font-size: 0.75rem;">Theo hệ thống chuẩn Việt Nam / Nhật Bản</small>
+                </div>
+                <div class="auth-form-row martial-arts-field" style="display: none;">
+                    <div class="form-group">
+                        <label for="edit-school"><i class="ri-sword-line"></i> Hệ phái (Ví dụ: Shotokan...)</label>
+                        <input type="text" id="edit-school" placeholder="Tên hệ phái Karate">
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-country"><i class="ri-global-line"></i> Quốc gia</label>
+                        <input type="text" id="edit-country" placeholder="Việt Nam, Nhật Bản...">
                     </div>
                 </div>
                 <div class="form-group">
