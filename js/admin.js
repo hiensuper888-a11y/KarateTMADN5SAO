@@ -13,7 +13,7 @@
     // Reuse the shared client (window.sb) from supabase-client.js for auth
     // This ensures the same session is shared between admin and index pages
     const anonClient = window.sb || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-        auth: { persistSession: true, detectSessionInUrl: false }
+        auth: { persistSession: true, detectSessionInUrl: true }
     });
     // Service role client for admin operations (bypasses RLS)
     const adminClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_KEY, {
