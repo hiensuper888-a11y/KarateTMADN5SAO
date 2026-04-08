@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dn5sao.edu.vn/sitemap.xml
