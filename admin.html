@@ -689,6 +689,51 @@
             .admin-main { margin-left: 0; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
         }
+
+        /* --- Social Login Styles --- */
+        .admin-divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-dim);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .admin-divider::before,
+        .admin-divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .admin-social-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        .btn-admin-social {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.8rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,0.03);
+            color: #fff;
+            font-family: var(--font-h);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .btn-admin-social:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); }
+        .btn-admin-social i { font-size: 1.1rem; }
+        .btn-admin-social.google:hover { color: #4285F4; border-color: #4285F4; box-shadow: 0 0 15px rgba(66,133,244,0.15); }
+        .btn-admin-social.x:hover { border-color: #fff; box-shadow: 0 0 15px rgba(255,255,255,0.1); }
     </style>
 </head>
 <body>
@@ -721,6 +766,16 @@
                     <i class="ri-login-circle-line"></i> Đăng Nhập
                 </button>
             </form>
+
+            <div class="admin-divider">HOẶC ĐĂNG NHẬP VỚI</div>
+            <div class="admin-social-group">
+                <button type="button" class="btn-admin-social google" id="btn-admin-google">
+                    <i class="ri-google-fill"></i> Google
+                </button>
+                <button type="button" class="btn-admin-social x" id="btn-admin-x">
+                    <i class="ri-twitter-x-fill"></i> X (Twitter)
+                </button>
+            </div>
 
             <a href="index.html" class="back-link">
                 <i class="ri-arrow-left-s-line"></i> Quay lại trang chủ

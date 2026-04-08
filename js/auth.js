@@ -273,21 +273,39 @@
             else if (m) msg = m;
             showMessage('login-message', 'error', msg);
         } finally { setLoading('btn-login-submit', false); }
-            const sb = getSB();
-            if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối. Vui lòng tải lại trang.'); return; }
-            setLoading('btn-login-' + provider, true);
-            sb.auth.signInWithOAuth({ provider })
-                .catch(err => {
-                    console.error('[SocialLogin]', provider, err);
-                    showMessage('login-message', 'error', 'Đăng nhập ' + provider + ' thất bại.');
-                })
-                .finally(() => setLoading('btn-login-' + provider, false));
-        }
-
-        // Attach listeners for new social buttons (if they exist)
-        document.getElementById('btn-login-google')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('google'); });
-        document.getElementById('btn-login-x')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('twitter'); });
     });
+
+
+    // ==== SOCIAL LOGIN HANDLERS ====
+    async function handleSocialLogin(provider) {
+        const sb = getSB();
+        if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối. Vui lòng tải lại trang.'); return; }
+        
+        // Note: For X/Twitter, Supabase provider is 'twitter'
+        const sbProvider = provider === 'x' ? 'twitter' : provider;
+        
+        try {
+            const { error } = await sb.auth.signInWithOAuth({
+                provider: sbProvider,
+                options: {
+                    redirectTo: window.location.origin
+                }
+            });
+            if (error) throw error;
+        } catch (err) {
+            console.error('[SocialLogin]', provider, err);
+            showMessage('login-message', 'error', `Đăng nhập bằng ${provider.toUpperCase()} thất bại.`);
+        }
+    }
+
+    // Attach listeners for social buttons (Login)
+    document.getElementById('btn-login-google')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('google'); });
+    document.getElementById('btn-login-x')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('x'); });
+
+    // Attach listeners for social buttons (Register)
+    document.getElementById('btn-reg-google')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('google'); });
+    document.getElementById('btn-reg-x')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('x'); });
+
 
     // ============ EDIT PROFILE ============
     document.getElementById('edit-profile-form')?.addEventListener('submit', async e => {

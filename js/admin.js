@@ -114,6 +114,26 @@
         }
     });
 
+    // ---- Social Admin Login ----
+    async function triggerSocialLogin(provider) {
+        const client = window.sb || anonClient;
+        try {
+            const { error } = await client.auth.signInWithOAuth({
+                provider: provider === 'x' ? 'twitter' : provider,
+                options: {
+                    redirectTo: window.location.href // Redirect back to admin page
+                }
+            });
+            if (error) throw error;
+        } catch (err) {
+            showLoginSection('Đăng nhập mạng xã hội thất bại: ' + err.message, 'error');
+        }
+    }
+
+    document.getElementById('btn-admin-google')?.addEventListener('click', () => triggerSocialLogin('google'));
+    document.getElementById('btn-admin-x')?.addEventListener('click', () => triggerSocialLogin('x'));
+
+
     // ---- Load all users ----
     async function loadAllUsers() {
         if (loadingSpinner) loadingSpinner.style.display = 'flex';
