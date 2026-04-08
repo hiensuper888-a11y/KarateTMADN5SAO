@@ -119,7 +119,7 @@
         const client = window.sb || anonClient;
         try {
             const { error } = await client.auth.signInWithOAuth({
-                provider: provider === 'x' ? 'twitter' : provider,
+                provider: provider,
                 options: {
                     redirectTo: window.location.href // Redirect back to admin page
                 }
@@ -131,7 +131,6 @@
     }
 
     document.getElementById('btn-admin-google')?.addEventListener('click', () => triggerSocialLogin('google'));
-    document.getElementById('btn-admin-x')?.addEventListener('click', () => triggerSocialLogin('x'));
 
 
     // ---- Load all users ----

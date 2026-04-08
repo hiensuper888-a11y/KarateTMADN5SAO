@@ -281,8 +281,7 @@
         const sb = getSB();
         if (!sb) { showMessage('login-message', 'error', 'Lỗi kết nối. Vui lòng tải lại trang.'); return; }
         
-        // Note: For X/Twitter, Supabase provider is 'twitter'
-        const sbProvider = provider === 'x' ? 'twitter' : provider;
+        const sbProvider = provider;
         
         try {
             const { error } = await sb.auth.signInWithOAuth({
@@ -300,11 +299,9 @@
 
     // Attach listeners for social buttons (Login)
     document.getElementById('btn-login-google')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('google'); });
-    document.getElementById('btn-login-x')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('x'); });
 
     // Attach listeners for social buttons (Register)
     document.getElementById('btn-reg-google')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('google'); });
-    document.getElementById('btn-reg-x')?.addEventListener('click', e => { e.preventDefault(); handleSocialLogin('x'); });
 
 
     // ============ EDIT PROFILE ============
